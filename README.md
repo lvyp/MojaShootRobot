@@ -1,2 +1,2 @@
 # MojaShootRobot
-MoJa shoot robot
+MoJa shoot Robot is used for shooting with child.

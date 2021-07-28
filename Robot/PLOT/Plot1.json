@@ -1,0 +1,148 @@
+{
+	"MoJa": [
+		{
+			"time": 0.010,
+			"sub_time_child": 0,
+			"action_child": "",
+			"sub_time_old": 0,
+			"action_old": "",
+			"dialogue": "./TtsRecording/xiangsheng/xiangsheng1.mp3",
+			"backgound music": ""
+		},
+		{
+			"time": 6.001,
+			"sub_time_child": 0,
+			"action_child": "",
+			"sub_time_old": 0,
+			"action_old": "",
+			"dialogue": "./TtsRecording/xiangsheng/xiangsheng2.mp3",
+			"backgound music": ""
+		},
+		{
+			"time": 8.200,
+			"sub_time_child": 0,
+			"action_child": "",
+			"sub_time_old": 0,
+			"action_old": "",
+			"dialogue": "./TtsRecording/xiangsheng/xiangsheng3.mp3",
+			"backgound music": ""
+		},
+		{
+			"time": 9.001,
+			"sub_time_child": 0,
+			"action_child": "",
+			"sub_time_old": 0,
+			"action_old": "",
+			"dialogue": "./TtsRecording/xiangsheng/xiangsheng4.mp3",
+			"backgound music": ""
+		},
+		{
+			"time": 10.200,
+			"sub_time_child": 0,
+			"action_child": "",
+			"sub_time_old": 0,
+			"action_old": "",
+			"dialogue": "./TtsRecording/xiangsheng/xiangsheng5.mp3",
+			"backgound music": ""
+		},
+		{
+			"time": 16.001,
+			"sub_time_child": 0,
+			"action_child": "",
+			"sub_time_old": 0,
+			"action_old": "",
+			"dialogue": "./TtsRecording/xiangsheng/xiangsheng6.mp3",
+			"backgound music": ""
+		},
+		{
+			"time": 17.200,
+			"sub_time_child": 0,
+			"action_child": "",
+			"sub_time_old": 0,
+			"action_old": "",
+			"dialogue": "./TtsRecording/xiangsheng/xiangsheng7.mp3",
+			"backgound music": ""
+		},
+		{
+			"time": 22.001,
+			"sub_time_child": 0,
+			"action_child": "",
+			"sub_time_old": 0,
+			"action_old": "",
+			"dialogue": "./TtsRecording/xiangsheng/xiangsheng8.mp3",
+			"backgound music": ""
+		},
+		{
+			"time": 23.200,
+			"sub_time_child": 0,
+			"action_child": "",
+			"sub_time_old": 0,
+			"action_old": "",
+			"dialogue": "./TtsRecording/xiangsheng/xiangsheng9.mp3",
+			"backgound music": ""
+		},
+		{
+			"time": 29.001,
+			"sub_time_child": 0,
+			"action_child": "",
+			"sub_time_old": 0,
+			"action_old": "",
+			"dialogue": "./TtsRecording/xiangsheng/xiangsheng10.mp3",
+			"backgound music": ""
+		},
+		{
+			"time": 32.200,
+			"sub_time_child": 0,
+			"action_child": "",
+			"sub_time_old": 0,
+			"action_old": "",
+			"dialogue": "./TtsRecording/xiangsheng/xiangsheng11.mp3",
+			"backgound music": ""
+		},
+		{
+			"time": 33.001,
+			"sub_time_child": 0,
+			"action_child": "",
+			"sub_time_old": 0,
+			"action_old": "",
+			"dialogue": "./TtsRecording/xiangsheng/xiangsheng12.mp3",
+			"backgound music": ""
+		},
+		{
+			"time": 34.200,
+			"sub_time_child": 0,
+			"action_child": "",
+			"sub_time_old": 0,
+			"action_old": "",
+			"dialogue": "./TtsRecording/xiangsheng/xiangsheng13.mp3",
+			"backgound music": ""
+		},
+		{
+			"time": 49.001,
+			"sub_time_child": 0,
+			"action_child": "",
+			"sub_time_old": 0,
+			"action_old": "",
+			"dialogue": "./TtsRecording/xiangsheng/xiangsheng14.mp3",
+			"backgound music": ""
+		},
+		{
+			"time": 52.200,
+			"sub_time_child": 0,
+			"action_child": "",
+			"sub_time_old": 0,
+			"action_old": "",
+			"dialogue": "./TtsRecording/xiangsheng/xiangsheng15.mp3",
+			"backgound music": ""
+		},
+		{
+			"time": 59.200,
+			"sub_time_child": 0,
+			"action_child": "",
+			"sub_time_old": 0,
+			"action_old": "",
+			"dialogue": "./TtsRecording/xiangsheng/xiangsheng16.mp3",
+			"backgound music": ""
+		}
+	]
+}
