@@ -32,7 +32,7 @@ class Serial(object):
         self.serialFd = 0
         self.targetList = {}
         self.availableDataList = []
-        self.getAbailableSerialList()
+        self.getAvailableSerialList()
         self.recvMessage()
         self.connectWifi()
         self.recvMessage()
@@ -88,13 +88,16 @@ class Serial(object):
     def connectWifi(self):
         self.sendMessage('connect_wifi[moja-5G{0}moja1122]'.format(chr(0x7f)))
 
-    def getAbailableSerialList(self):
+    def getAvailableSerialList(self):
         plist = list(serial.tools.list_ports.comports())
         if len(plist) <= 0:
             logger.info("The Serial port can't find!")
         else:
-            plist_0 = list(plist[0])
-            serialName = plist_0[0]
+            if 0:
+                plist_0 = list(plist[0])
+                serialName = plist_0[0]
+            else:
+                serialName = "COM7"
             self.serialFd = serial.Serial(serialName, 115200, timeout=60)
             logger.info("check which port was really used >" + self.serialFd.name)
 
@@ -118,25 +121,24 @@ class Serial(object):
             with open("serialLog.txt", "a") as f:
                 serStr = str(self.serialFd.read(self.serialFd.in_waiting)) + "\r\n"
                 f.write(serStr)
-                if "move_status" in serStr:
-                    print("move_status")
+                # if "move_status" in serStr:
+                #     print("move_status")
             serStr = serStr.replace("\\xaaT", "0xaaT")
             serStr = serStr.replace("\\", "0")
             serStrList = serStr.split("0xaaT")
-            serStr = ""
             # del serStrList[0]
             # 解析有效数据
             for tempStr in serStrList:
                 # 过滤无效数据
                 logger.info("接收数据> " + tempStr)
                 if "move_status" in tempStr:
-                    len = tempStr.find("move_status")
-                    logger.info("move_status: " + tempStr[len + 12])
-                    globalVariable.set_nav_status(tempStr[len + 12])
+                    startIndex = tempStr.find("move_status")
+                    logger.info("move_status: " + tempStr[startIndex + 12])
+                    globalVariable.set_nav_status(tempStr[startIndex + 12])
 
-                if "nav:pose" in tempStr:
-                    logger.info("nav:pose: " + tempStr[7:-2])
-                    globalVariable.initPoint.append(tempStr[7:-2])
+                # if "nav:pose" in tempStr:
+                #     logger.info("nav:pose: " + tempStr[7:-2])
+                #     globalVariable.initPoint.append(tempStr[7:-2])
 
                 if "get_max_vel" in tempStr:
                     logger.info("Get Current Speed >" + tempStr)
@@ -174,6 +176,8 @@ class Serial(object):
                 else:
                     pass
             del serStrList
+        else:
+            print("self.serialFd.in_waiting>" + str(self.serialFd.in_waiting))
 
     def serialClose(self):
         self.serialFd.close()
@@ -187,3 +191,6 @@ class Serial(object):
 
     def modifyMaxVel(self, speed):
         self.sendMessage("max_vel[{0}]".format(speed))
+
+    def justCharge(self):
+        self.sendMessage("goal:just_charge")

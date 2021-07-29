@@ -28,17 +28,17 @@ def PlayVoice(path):
         logger.info("对话应答已回复！！\n")
 
 
-def minChangeToSec(m, s):
-    s = m*60 + s
+def minChangeToSec(h, m, s):
+    s = h*60*60 + m*60 + s
     return s
 
 
 def timerMachine(startTime=0.000):
-    dt_ms = datetime.datetime.now().strftime('%M:%S.%f')
-    m, s = dt_ms.strip().split(":")
-    ms = minChangeToSec(float(m), float(s))
+    dt_hms = datetime.datetime.now().strftime('%H:%M:%S.%f')
+    h, m, s = dt_hms.strip().split(":")
+    hms = minChangeToSec(float(h), float(m), float(s))
     # print("m: " + m + " s: " + s + " ms: " + str(ms) + " startTime: " + str(startTime))
-    return float('%.3f' % (ms - startTime))
+    return float('%.3f' % (hms - startTime))
 
 
 def parsePlot(jsonPath):

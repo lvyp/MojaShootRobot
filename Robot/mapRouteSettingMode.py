@@ -28,7 +28,11 @@ def mapRouteSettingMode():
             globalVariable.set_value("positionInformationFromChassisFlag", True)
             globalVariable.set_value("mapRouteSettingFlag", False)
         elif globalVariable.get_value("mapRouteSettingInitPointFlag") is True:
-            globalVariable.mojaSerial.sendMessage("nav:get_pose")
+            # globalVariable.mojaSerial.sendMessage("nav:get_pose")
+            # 退回到充电桩位置
+            globalVariable.mojaSerial.sendMessage("point[charging_pile]")
+            # 直接对接充电桩充电
+            globalVariable.mojaSerial.justCharge()
             globalVariable.moveStatus = 1  # 设置机器人运动状态为运动中，运动中不会进行声源定位
             globalVariable.set_value("mapRouteSettingInitPointFlag", False)
             globalVariable.set_value("positionInformationFromChassisInitPointFlag", True)
