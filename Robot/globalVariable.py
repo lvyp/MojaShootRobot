@@ -3,6 +3,8 @@
 import threading
 from enum import Enum
 from serialClass import Serial
+from buttonTcpServer import *
+import random
 
 
 def _init():  # 初始化
@@ -20,6 +22,16 @@ def _init():  # 初始化
     global session_id
     global moveStatus
     global initPoint
+    # 红黄蓝得分
+    global redScore
+    global yellowScore
+    global blueScore
+    # 播报次数
+    global simple_count
+    global easy_count
+    global hard_count
+    global shootRobotServer
+
 
     _global_dict = {}
     _event = threading.Event()
@@ -35,6 +47,13 @@ def _init():  # 初始化
     mojaSerial = Serial()
     moveStatus = 0  # 0是未运动;1是运动中;
     initPoint = []
+    redScore = 0
+    yellowScore = 0
+    blueScore = 0
+    simple_count = 0
+    easy_count = 0
+    hard_count = 0
+    shootRobotServer = TcpServer()
 
 
 def get_nav_status():
@@ -52,10 +71,13 @@ def get_position_list_len():
 
 def get_position_name():
     global position_name
-    global _position_list_len
-    position_name = _position_name_list[0]
-    del _position_name_list[0]
-    _position_list_len = len(_position_name_list)
+    while 1:
+        randomPosition = random.sample(_position_name_list, len(_position_name_list))
+        if position_name != randomPosition:
+            position_name = randomPosition
+            break
+        else:
+            pass
     return position_name
 
 

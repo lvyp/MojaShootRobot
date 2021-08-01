@@ -31,6 +31,7 @@ class Serial(object):
     def __init__(self):
         self.serialFd = 0
         self.targetList = {}
+        self.initTargetList = {}
         self.availableDataList = []
         self.getAvailableSerialList()
         self.recvMessage()
@@ -41,8 +42,13 @@ class Serial(object):
         with open("targetList.txt", "r", encoding='UTF-8') as f:
             self.target = json.load(f)
             print(self.target)
+        with open("initPosition.txt", "r", encoding='UTF-8') as f:
+            self.initTarget = json.load(f)
+            print(self.initTarget)
         self.set_target_List()
+        self.set_init_target_List()
 
+    # 设置运动目标点列表
     def set_target_List(self):
         head = "nav:set_flag_point"
         tail = "]"
@@ -64,9 +70,37 @@ class Serial(object):
             message = head + message + "," + key + tail
             self.sendMessage(message)
 
+    # 获取运动目标点列表
     def get_target_list(self):
         logger.info(self.targetList)
         return self.targetList
+
+    # 设置初始目标点列表
+    def set_init_target_List(self):
+        head = "nav:set_flag_point"
+        tail = "]"
+        for key in self.initTarget:
+            message = ""
+            for i in range(len(self.initTarget[key])):
+                self.initTarget[key][i] = str(self.initTarget[key][i])
+                if i == 0:
+                    symbol = '['
+                    message = symbol + message + self.initTarget[key][i]
+                elif i == len(self.initTarget[key]):
+                    symbol = ']'
+                    message = message + self.initTarget[key][i] + symbol
+                else:
+                    symbol = ","
+                    message = message + symbol + self.initTarget[key][i]
+
+            self.initTargetList[key] = message + tail
+            message = head + message + "," + key + tail
+            self.sendMessage(message)
+
+    # 获取初始目标点列表
+    def get_init_target_list(self):
+        logger.info(self.initTargetList)
+        return self.initTargetList
 
     def __new__(cls, *args, **kwargs):
         if not hasattr(Serial, "_instance"):
@@ -75,19 +109,24 @@ class Serial(object):
                     Serial._instance = object.__new__(cls)
         return Serial._instance
 
+    # 重启机器
     def reboot_machine(self):
         logger.info("导航机器人 -----> 底盘重启")
         self.sendMessage('sys:reboot_machine')
 
+    # WIFI IP(主机IP)
     def wifiIp(self):
         self.sendMessage('ip:request')
 
+    # lan IP
     def lanIp(self):
         self.sendMessage("ip_lan:request")
 
+    # 连接WIFI
     def connectWifi(self):
         self.sendMessage('connect_wifi[moja-5G{0}moja1122]'.format(chr(0x7f)))
 
+    # 获取可用串口列表
     def getAvailableSerialList(self):
         plist = list(serial.tools.list_ports.comports())
         if len(plist) <= 0:
@@ -101,6 +140,7 @@ class Serial(object):
             self.serialFd = serial.Serial(serialName, 115200, timeout=60)
             logger.info("check which port was really used >" + self.serialFd.name)
 
+    # 发送串口信息
     def sendMessage(self, Data):
         # 将字符串数据转换为bytes数组
         # 数据包头
@@ -116,6 +156,7 @@ class Serial(object):
         serStr = self.serialFd.write(message)
         print(serStr)
 
+    # 接收串口信息
     def recvMessage(self):
         if self.serialFd.in_waiting:
             with open("serialLog.txt", "a") as f:
@@ -179,6 +220,7 @@ class Serial(object):
         else:
             print("self.serialFd.in_waiting>" + str(self.serialFd.in_waiting))
 
+    # 关闭串口
     def serialClose(self):
         self.serialFd.close()
 
@@ -186,11 +228,18 @@ class Serial(object):
     def getPose(self):
         self.sendMessage("get_pose")
 
+    # 获取当前最大速度
     def getMaxVel(self):
         self.sendMessage("get_max_vel")
 
+    # 修改最大速度
     def modifyMaxVel(self, speed):
         self.sendMessage("max_vel[{0}]".format(speed))
 
+    # 直接对接充电桩
     def justCharge(self):
         self.sendMessage("goal:just_charge")
+
+    # 取消导航
+    def cancelGuide(self):
+        self.sendMessage("cancel_goal")

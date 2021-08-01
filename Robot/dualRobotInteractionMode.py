@@ -125,30 +125,6 @@ def switch_if():
             globalVariable.set_position(globalVariable.position_name, False)
             mapRouteSettingClearJudge()
 
-    # if globalVariable.get_position("position2"):
-    #     logger.info("到达位置A")
-    #     parsePlot("./PLOT/Plot1.json")
-    #     globalVariable.set_position("position2", False)
-    #     mapRouteSettingClearJudge()
-    # elif globalVariable.get_position("position1"):
-    #     logger.info("到达位置B")
-    #     parsePlot("./PLOT/Plot.json")
-    #     globalVariable.set_position("position1", False)
-    #     if globalVariable.get_position_list_len() > 0:
-    #         globalVariable.set_value("mapRouteSettingFlag", True)
-    #     else:
-    #         pass
-    # elif globalVariable.get_position("positionC"):
-    #     logger.info("到达位置C")
-    #     globalVariable.set_position("positionC", False)
-    #     pass
-    # elif globalVariable.get_position("positionD"):
-    #     logger.info("到达位置D")
-    #     globalVariable.set_position("positionD", False)
-    #     pass
-    # else:
-    #     pass
-
 
 def dualRobotInteractionMode():
     # 双机器人互动模块：设置对话情景，根据机器人对话情景，发送相应的指令到动作模块
