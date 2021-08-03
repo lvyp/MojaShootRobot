@@ -100,30 +100,31 @@ def parsePlot(jsonPath):
                 pass
 
 
-def mapRouteSettingClearJudge():
-    if globalVariable.get_position_list_len() > 0:
-        # 位置列表不为空，继续发送位置信息
-        globalVariable.set_value("mapRouteSettingFlag", True)
-    else:
-        # 位置列为空，不发送位置信息
-        # 运动状态置位，未运动
-        globalVariable.moveStatus = 0
-        # 让机器人回到初始点
-        globalVariable.set_value("mapRouteSettingInitPointFlag", True)
-
-
 def switch_if():
-    if globalVariable.get_position(globalVariable.position_name):
-        logger.info("到达位置:" + globalVariable.position_name)
-        jsonFilePath = "./PLOT/" + globalVariable.position_name + ".json"
+    if globalVariable.get_value("simple_plot"):
+        jsonFilePath = "./PLOT/simple_plot.json"
 
         if os.path.exists(jsonFilePath):
             parsePlot(jsonFilePath)
-            globalVariable.set_position(globalVariable.position_name, False)
-            mapRouteSettingClearJudge()
+            globalVariable.set_value("simple_plot", False)
         else:
-            globalVariable.set_position(globalVariable.position_name, False)
-            mapRouteSettingClearJudge()
+            globalVariable.set_value("simple_plot", False)
+    elif globalVariable.get_value("easy_plot"):
+        jsonFilePath = "./PLOT/easy_plot.json"
+
+        if os.path.exists(jsonFilePath):
+            parsePlot(jsonFilePath)
+            globalVariable.set_value("easy_plot", False)
+        else:
+            globalVariable.set_value("easy_plot", False)
+    elif globalVariable.get_value("hard_plot"):
+        jsonFilePath = "./PLOT/hard_plot.json"
+
+        if os.path.exists(jsonFilePath):
+            parsePlot(jsonFilePath)
+            globalVariable.set_value("hard_plot", False)
+        else:
+            globalVariable.set_value("hard_plot", False)
 
 
 def dualRobotInteractionMode():

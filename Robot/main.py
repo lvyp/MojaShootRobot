@@ -7,13 +7,9 @@
 
 import threading
 from loggerMode import logger
-from speechRecognitionMode import speechRecognitionMode
-from actionControlMode import actionControlMode
 from dualRobotInteractionMode import dualRobotInteractionMode
 from mapRouteSettingMode import mapRouteSettingMode
 from positionInformationFromChassisMode import positionInformationFromChassisMode
-from remoteControlMode import remoteControlMode
-from accessSystemUpdateRegularlyMode import accessSystemUpdateRegularlyMode
 from scoreMode import scoreMode
 import globalVariable
 

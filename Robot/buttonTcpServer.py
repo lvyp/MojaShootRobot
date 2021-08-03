@@ -8,6 +8,7 @@ import threading
 import datetime
 import globalVariable
 from socket import *
+from loggerMode import logger
 
 
 def minChangeToSec(h, m, s):
@@ -23,12 +24,21 @@ def timerMachine(startTime=0.000):
     return float('%.3f' % (hms - startTime))
 
 
+def getIp():
+    # 获取本机电脑名
+    myName = getfqdn(gethostname())
+    # 获取本机ip
+    myAddr = gethostbyname(myName)
+    logger.info("IP>" + myAddr)
+    return myAddr
+
+
 class TcpServer(object):
     _instance_lock = threading.Lock()
 
     def __init__(self):
         self.pushButton = 0  # 按压按钮，关闭：偶数；开启：单数
-        self.server_ip = "192.168.1.49"
+        self.server_ip = getIp()
         self.server_port = 9527
         self.tcp_server_socket = None
         self.client_socket = None
