@@ -25,7 +25,8 @@ def mapRouteSettingMode():
             globalVariable.mojaSerial.cancelGuide()
             # 发送游戏点位位置名称
             globalVariable.mojaSerial.sendMessage("point[{0}]".format(globalVariable.get_position_name()))
-            globalVariable.moveStatus = 1  # 设置机器人运动状态为运动中，运动中不会进行声源定位
+            print("point[{0}]".format(globalVariable.get_position_name()))
+            # globalVariable.moveStatus = 1  # 设置机器人运动状态为运动中，运动中不会进行声源定位
             globalVariable.set_value("positionInformationFromChassisFlag", True)
             globalVariable.set_value("mapRouteSettingFlag", False)
         elif globalVariable.get_value("mapRouteSettingInitPointFlag") is True:

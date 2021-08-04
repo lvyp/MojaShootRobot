@@ -14,6 +14,7 @@ import globalVariable
 from loggerMode import logger
 from playsound import playsound
 import playAudioByLeftRightTrack as LRTrack
+from MoJaTimer import *
 
 TTS_BY_COMMUNICATION_PATH = "./TtsRecording/dualRobotCommunication/"
 TTS_BY_XIANGSHENG_PATH = "./TtsRecording/xiangsheng/"
@@ -26,19 +27,6 @@ def PlayVoice(path):
         logger.info("音频格式不正确，无法播放！！\n")
     else:
         logger.info("对话应答已回复！！\n")
-
-
-def minChangeToSec(h, m, s):
-    s = h*60*60 + m*60 + s
-    return s
-
-
-def timerMachine(startTime=0.000):
-    dt_hms = datetime.datetime.now().strftime('%H:%M:%S.%f')
-    h, m, s = dt_hms.strip().split(":")
-    hms = minChangeToSec(float(h), float(m), float(s))
-    # print("m: " + m + " s: " + s + " ms: " + str(ms) + " startTime: " + str(startTime))
-    return float('%.3f' % (hms - startTime))
 
 
 def parsePlot(jsonPath):

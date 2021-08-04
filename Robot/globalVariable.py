@@ -28,6 +28,8 @@ def _init():  # 初始化
     global easy_count
     global hard_count
     global shootRobotServer
+    # 计时初始值
+    global initTime
 
 
     _global_dict = {}
@@ -46,6 +48,7 @@ def _init():  # 初始化
     simple_count = 0
     easy_count = 0
     hard_count = 0
+    initTime = 0
     shootRobotServer = TcpServer()
 
 
@@ -66,8 +69,8 @@ def get_position_name():
     global position_name
     while 1:
         randomPosition = random.sample(_position_name_list, len(_position_name_list))
-        if position_name != randomPosition:
-            position_name = randomPosition
+        if position_name != randomPosition[0]:
+            position_name = randomPosition[0]
             break
         else:
             pass

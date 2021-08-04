@@ -25,8 +25,8 @@ if __name__ == '__main__':
     globalVariable._init()
 
     # 设置初始点运动位置
-    globalVariable.set_position_name_by_serial(globalVariable.mojaSerial.get_init_target_list())
-    globalVariable.set_value("mapRouteSettingInitPointFlag", True)
+    # globalVariable.set_position_name_by_serial(globalVariable.mojaSerial.get_init_target_list())
+    # globalVariable.set_value("mapRouteSettingInitPointFlag", True)
 
     globalVariable.set_value("actionFlag", False)
     globalVariable.set_value("mapRouteSettingFlag", False)

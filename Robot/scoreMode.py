@@ -8,33 +8,41 @@ import globalVariable
 import dualRobotInteractionMode
 from loggerMode import logger
 import threading
+from MoJaTimer import *
 
 
 def robotStatus():
     # 计算总积分
     sumScore = globalVariable.redScore + globalVariable.yellowScore + globalVariable.blueScore
-
+    # 计算游戏时间
+    currentTime = timerMachine()
+    if globalVariable.initTime == 0:
+        globalVariable.initTime = currentTime
     # 根据得分不同进行不同状态变化
-    if (sumScore == 0) and (globalVariable.simple_count == 0):
+    if ((sumScore == 10) or (currentTime - globalVariable.initTime >= 60)) \
+            and (globalVariable.simple_count == 0):
         # 播报次数设置:1,播报一次之后不再进行播报
         globalVariable.simple_count == 1
         # 对话播放
         globalVariable.set_value("simple_plot", True)
-    elif (sumScore == 30) and (globalVariable.easy_count == 0):
+    elif ((sumScore == 30) or (currentTime - globalVariable.initTime >= 120)) \
+            and (globalVariable.easy_count == 0):
         # 播报次数设置:1,播报一次之后不再进行播报
         globalVariable.easy_count == 1
         # 提升底盘速度
         globalVariable.mojaSerial.modifyMaxVel("0.6")
         # 对话播放
         globalVariable.set_value("easy_plot", True)
-    elif (sumScore == 70) and (globalVariable.hard_count == 0):
+    elif ((sumScore == 70) or (currentTime - globalVariable.initTime >= 180)) \
+            and (globalVariable.hard_count == 0):
         # 播报次数设置:1,播报一次之后不再进行播报
         globalVariable.hard_count == 1
         # 提升底盘速度
         globalVariable.mojaSerial.modifyMaxVel("1.0")
         # 对话播放
         globalVariable.set_value("hard_plot", True)
-    elif sumScore == 100:
+    elif (sumScore == 100) or (currentTime - globalVariable.initTime >= 240):
+        globalVariable.set_value("scoreFlag", False)
         # 将底盘运动速度降低
         globalVariable.mojaSerial.modifyMaxVel("0.3")
         # 运动状态置位，未运动
@@ -49,6 +57,8 @@ def robotStatus():
         globalVariable.simple_count = 0
         globalVariable.easy_count = 0
         globalVariable.hard_count = 0
+        # 初始时间设置为0
+        globalVariable.initTime = 0
     else:
         pass
 

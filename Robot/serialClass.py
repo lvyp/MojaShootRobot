@@ -136,7 +136,7 @@ class Serial(object):
                 plist_0 = list(plist[0])
                 serialName = plist_0[0]
             else:
-                serialName = "COM7"
+                serialName = "COM3"
             self.serialFd = serial.Serial(serialName, 115200, timeout=60)
             logger.info("check which port was really used >" + self.serialFd.name)
 
@@ -154,7 +154,7 @@ class Serial(object):
         # 串口通信数据
         message = binascii.a2b_hex(frameHead + dataLen) + dataBody + binascii.a2b_hex(parity)
         serStr = self.serialFd.write(message)
-        print(serStr)
+        # print(serStr)
 
     # 接收串口信息
     def recvMessage(self):
@@ -171,7 +171,7 @@ class Serial(object):
             # 解析有效数据
             for tempStr in serStrList:
                 # 过滤无效数据
-                logger.info("接收数据> " + tempStr)
+                # logger.info("接收数据> " + tempStr)
                 if "move_status" in tempStr:
                     startIndex = tempStr.find("move_status")
                     logger.info("move_status: " + tempStr[startIndex + 12])
@@ -213,12 +213,14 @@ class Serial(object):
                     elif "move_status" in tempStr:
                         logger.info("机器人导航状态: " + self.availableDataList[-1])
                     else:
-                        print("没有请求的数据返回")
+                        # print("没有请求的数据返回")
+                        pass
                 else:
                     pass
             del serStrList
         else:
-            print("self.serialFd.in_waiting>" + str(self.serialFd.in_waiting))
+            # print("self.serialFd.in_waiting>" + str(self.serialFd.in_waiting))
+            pass
 
     # 关闭串口
     def serialClose(self):

@@ -5,23 +5,12 @@
 # @File : buttonTcpServer.py
 # @Software: PyCharm
 import threading
-import datetime
 import globalVariable
 from socket import *
 from loggerMode import logger
+from MoJaTimer import *
 
 
-def minChangeToSec(h, m, s):
-    s = h * 60 * 60 + m * 60 + s
-    return s
-
-
-def timerMachine(startTime=0.000):
-    dt_hms = datetime.datetime.now().strftime('%H:%M:%S.%f')
-    h, m, s = dt_hms.strip().split(":")
-    hms = minChangeToSec(float(h), float(m), float(s))
-    # print("m: " + m + " s: " + s + " ms: " + str(ms) + " startTime: " + str(startTime))
-    return float('%.3f' % (hms - startTime))
 
 
 def getIp():
@@ -80,8 +69,8 @@ class TcpServer(object):
                 self.pushButton += 1
                 self.initTime = currentTime
 
-            # 30为游戏时长，单位秒
-            if (currentTime - self.initTime) > 30:
+            # 240为游戏时长，单位秒
+            if (currentTime - self.initTime) > 240:
                 self.pushButton += 1
             elif currentTime - self.initTime == 0:
                 print("初次按钮触发")
