@@ -70,7 +70,6 @@ def scoreMode():
     while 1:
         rLock.acquire()
         if globalVariable.get_value("scoreFlag") is True:
-            # 进行计数通信
 
             # 根据不同小球的得分发送相应的数据进行显示
 

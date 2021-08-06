@@ -2,6 +2,10 @@
 
 import threading
 from enum import Enum
+
+from sensorCountMode import SensorCount
+
+from loraSerialClass import LoraSerial
 from serialClass import Serial
 from buttonTcpServer import *
 import random
@@ -30,7 +34,10 @@ def _init():  # 初始化
     global shootRobotServer
     # 计时初始值
     global initTime
-
+    # 计分实例
+    global sensorCount
+    # Lora通信实例
+    global loraSerial
 
     _global_dict = {}
     _event = threading.Event()
@@ -49,7 +56,9 @@ def _init():  # 初始化
     easy_count = 0
     hard_count = 0
     initTime = 0
-    shootRobotServer = TcpServer()
+    # shootRobotServer = TcpServer()
+    sensorCount = SensorCount()
+    loraSerial = LoraSerial()
 
 
 def get_nav_status():

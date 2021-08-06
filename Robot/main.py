@@ -14,6 +14,21 @@ from scoreMode import scoreMode
 import globalVariable
 
 
+def sensorCount():
+    while 1:
+        # 进行计数通信
+        scoreFlag = globalVariable.sensorCount.getPortVal()
+        if scoreFlag:
+            globalVariable.blueScore += 1
+        else:
+            pass
+
+
+def loraSerial():
+    while 1:
+        globalVariable.loraSerial.loraRecvMessage()
+
+
 def serverMode():
     while 1:
         globalVariable.shootRobotServer.recvMessage()
@@ -38,16 +53,20 @@ if __name__ == '__main__':
 
     # 创建线程：
     # actionControl = threading.Thread(target=actionControlMode)
+    lora = threading.Thread(target=loraSerial)
+    sensor = threading.Thread(target=sensorCount)
     score = threading.Thread(target=scoreMode)
-    tcpServer = threading.Thread(target=serverMode)
+    # tcpServer = threading.Thread(target=serverMode)
     dualRobotInteraction = threading.Thread(target=dualRobotInteractionMode)
     mapRouteSetting = threading.Thread(target=mapRouteSettingMode)
     # speechRecognition = threading.Thread(target=speechRecognitionMode)
     positionInformationFromChassis = threading.Thread(target=positionInformationFromChassisMode)
     # speechRecognition.setName("speechRecognition")
     # actionControl.setName("actionControl")
+    lora.setName("lora")
+    sensor.setName("sensor")
     score.setName("score")
-    tcpServer.setName("tcpServer")
+    # tcpServer.setName("tcpServer")
     dualRobotInteraction.setName("dualRobotInteraction")
     mapRouteSetting.setName("mapRouteSetting")
     positionInformationFromChassis.setName("positionInformationFromChassis")
@@ -60,8 +79,10 @@ if __name__ == '__main__':
     # 添加到线程组
     # threads.append(speechRecognition)
     # threads.append(actionControl)
+    threads.append(lora)
+    threads.append(sensor)
     threads.append(score)
-    threads.append(tcpServer)
+    # threads.append(tcpServer)
     threads.append(mapRouteSetting)
     threads.append(dualRobotInteraction)
     threads.append(positionInformationFromChassis)

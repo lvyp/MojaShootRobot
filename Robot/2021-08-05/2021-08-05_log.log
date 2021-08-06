@@ -1,0 +1,62 @@
+2021-08-05 15:48:44,411 - main.py[line:39] - INFO: 墨甲导览机器人启动入口
+2021-08-05 15:48:44,418 - serialClass.py[line:141] - INFO: check which port was really used >COM3
+2021-08-05 15:48:44,454 - scoreMode.py[line:67] - INFO: 得分模块入口
+2021-08-05 15:48:44,462 - mapRouteSettingMode.py[line:15] - INFO: 地图路线设置模块入口
+2021-08-05 15:48:44,494 - dualRobotInteractionMode.py[line:120] - INFO: 双机器人互动模块入口
+2021-08-05 15:48:44,509 - positionInformationFromChassisMode.py[line:44] - INFO: 底盘交互模块模块入口
+2021-08-05 15:50:12,988 - main.py[line:39] - INFO: 墨甲导览机器人启动入口
+2021-08-05 15:50:12,988 - serialClass.py[line:141] - INFO: check which port was really used >COM3
+2021-08-05 15:50:13,035 - scoreMode.py[line:67] - INFO: 得分模块入口
+2021-08-05 15:50:13,035 - mapRouteSettingMode.py[line:15] - INFO: 地图路线设置模块入口
+2021-08-05 15:50:13,066 - dualRobotInteractionMode.py[line:120] - INFO: 双机器人互动模块入口
+2021-08-05 15:50:13,066 - positionInformationFromChassisMode.py[line:44] - INFO: 底盘交互模块模块入口
+2021-08-05 15:50:38,335 - main.py[line:39] - INFO: 墨甲导览机器人启动入口
+2021-08-05 15:50:38,342 - serialClass.py[line:141] - INFO: check which port was really used >COM3
+2021-08-05 15:50:38,378 - scoreMode.py[line:67] - INFO: 得分模块入口
+2021-08-05 15:50:38,378 - mapRouteSettingMode.py[line:15] - INFO: 地图路线设置模块入口
+2021-08-05 15:50:38,388 - dualRobotInteractionMode.py[line:120] - INFO: 双机器人互动模块入口
+2021-08-05 15:50:38,420 - positionInformationFromChassisMode.py[line:44] - INFO: 底盘交互模块模块入口
+2021-08-05 15:51:04,909 - main.py[line:39] - INFO: 墨甲导览机器人启动入口
+2021-08-05 15:51:04,916 - serialClass.py[line:141] - INFO: check which port was really used >COM3
+2021-08-05 15:51:04,952 - scoreMode.py[line:67] - INFO: 得分模块入口
+2021-08-05 15:51:04,972 - mapRouteSettingMode.py[line:15] - INFO: 地图路线设置模块入口
+2021-08-05 15:51:04,988 - dualRobotInteractionMode.py[line:120] - INFO: 双机器人互动模块入口
+2021-08-05 15:51:04,988 - positionInformationFromChassisMode.py[line:44] - INFO: 底盘交互模块模块入口
+2021-08-05 15:55:25,119 - main.py[line:39] - INFO: 墨甲导览机器人启动入口
+2021-08-05 15:55:25,134 - serialClass.py[line:141] - INFO: check which port was really used >COM3
+2021-08-05 15:55:25,165 - scoreMode.py[line:67] - INFO: 得分模块入口
+2021-08-05 15:55:25,197 - mapRouteSettingMode.py[line:15] - INFO: 地图路线设置模块入口
+2021-08-05 15:55:25,243 - dualRobotInteractionMode.py[line:120] - INFO: 双机器人互动模块入口
+2021-08-05 15:55:25,259 - positionInformationFromChassisMode.py[line:44] - INFO: 底盘交互模块模块入口
+2021-08-05 15:59:58,320 - main.py[line:39] - INFO: 墨甲导览机器人启动入口
+2021-08-05 15:59:58,335 - serialClass.py[line:141] - INFO: check which port was really used >COM3
+2021-08-05 15:59:58,382 - scoreMode.py[line:67] - INFO: 得分模块入口
+2021-08-05 15:59:58,382 - mapRouteSettingMode.py[line:15] - INFO: 地图路线设置模块入口
+2021-08-05 15:59:58,429 - dualRobotInteractionMode.py[line:120] - INFO: 双机器人互动模块入口
+2021-08-05 15:59:58,445 - positionInformationFromChassisMode.py[line:44] - INFO: 底盘交互模块模块入口
+2021-08-05 16:03:56,816 - main.py[line:39] - INFO: 墨甲导览机器人启动入口
+2021-08-05 16:03:56,832 - serialClass.py[line:141] - INFO: check which port was really used >COM3
+2021-08-05 16:03:56,863 - scoreMode.py[line:67] - INFO: 得分模块入口
+2021-08-05 16:03:56,878 - mapRouteSettingMode.py[line:15] - INFO: 地图路线设置模块入口
+2021-08-05 16:03:56,894 - dualRobotInteractionMode.py[line:120] - INFO: 双机器人互动模块入口
+2021-08-05 16:03:56,925 - positionInformationFromChassisMode.py[line:44] - INFO: 底盘交互模块模块入口
+2021-08-05 16:11:46,969 - main.py[line:39] - INFO: 墨甲导览机器人启动入口
+2021-08-05 16:11:46,985 - serialClass.py[line:141] - INFO: check which port was really used >COM3
+2021-08-05 16:11:47,048 - scoreMode.py[line:67] - INFO: 得分模块入口
+2021-08-05 16:11:47,063 - mapRouteSettingMode.py[line:15] - INFO: 地图路线设置模块入口
+2021-08-05 16:11:47,079 - dualRobotInteractionMode.py[line:120] - INFO: 双机器人互动模块入口
+2021-08-05 16:11:47,094 - positionInformationFromChassisMode.py[line:44] - INFO: 底盘交互模块模块入口
+2021-08-05 16:15:33,875 - main.py[line:39] - INFO: 墨甲导览机器人启动入口
+2021-08-05 16:15:33,875 - serialClass.py[line:141] - INFO: check which port was really used >COM3
+2021-08-05 16:15:33,906 - scoreMode.py[line:67] - INFO: 得分模块入口
+2021-08-05 16:15:33,906 - mapRouteSettingMode.py[line:15] - INFO: 地图路线设置模块入口
+2021-08-05 16:15:33,922 - dualRobotInteractionMode.py[line:120] - INFO: 双机器人互动模块入口
+2021-08-05 16:15:33,969 - positionInformationFromChassisMode.py[line:44] - INFO: 底盘交互模块模块入口
+2021-08-05 16:16:03,094 - main.py[line:39] - INFO: 墨甲导览机器人启动入口
+2021-08-05 16:16:03,110 - serialClass.py[line:141] - INFO: check which port was really used >COM3
+2021-08-05 16:16:03,141 - scoreMode.py[line:67] - INFO: 得分模块入口
+2021-08-05 16:16:03,173 - mapRouteSettingMode.py[line:15] - INFO: 地图路线设置模块入口
+2021-08-05 16:16:03,188 - dualRobotInteractionMode.py[line:120] - INFO: 双机器人互动模块入口
+2021-08-05 16:16:03,204 - positionInformationFromChassisMode.py[line:44] - INFO: 底盘交互模块模块入口
+2021-08-05 16:16:04,985 - serialClass.py[line:75] - INFO: {'position1': '[-8.34,0.18,0]', 'position2': '[-7.78,-1.63,0]', 'position3': '[-7.01,0.58,15.52]', 'position4': '[-6.18,-1.18,19.65]', 'position5': '[-7.32,-0.61,16.7]'}
+2021-08-05 16:16:04,985 - mapRouteSettingMode.py[line:23] - INFO: 地图设置向模块底层发送数据
