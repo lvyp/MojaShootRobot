@@ -26,6 +26,8 @@ def PlayVoice(path):
 
 
 def getPositionAndStartPlot(flag, settingFlag):
+    # 请求获取当前位置信息
+    globalVariable.mojaSerial.getPose()
     globalVariable.mojaSerial.recvMessage()
     if globalVariable.get_nav_status() == "2":
         globalVariable.set_value(flag, False)

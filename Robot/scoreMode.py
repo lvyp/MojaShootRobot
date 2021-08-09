@@ -5,7 +5,6 @@
 # @File : scoreMode.py
 # @Software: PyCharm
 import globalVariable
-import dualRobotInteractionMode
 from loggerMode import logger
 import threading
 from MoJaTimer import *
@@ -13,7 +12,11 @@ from MoJaTimer import *
 
 def robotStatus():
     # 计算总积分
-    sumScore = globalVariable.redScore + globalVariable.yellowScore + globalVariable.blueScore
+    sumScore = globalVariable.blueScore
+
+    # 上一次得分
+    globalVariable.yellowScore = globalVariable.blueScore
+
     # 计算游戏时间
     currentTime = timerMachine()
     if globalVariable.initTime == 0:
@@ -69,9 +72,13 @@ def scoreMode():
     rLock = threading.RLock()
     while 1:
         rLock.acquire()
-        if globalVariable.get_value("scoreFlag") is True:
+        if globalVariable.get_value("scoreFlag"):
 
-            # 根据不同小球的得分发送相应的数据进行显示
+            # 判断是否得分，得分通过modbus rtu控制得分牌显示得分
+            if globalVariable.yellowScore == globalVariable.blueScore:
+                pass
+            else:
+                globalVariable.loraSerial.modbusRtuSendMessage(globalVariable.blueScore)
 
             # 机器人状态变化
             robotStatus()

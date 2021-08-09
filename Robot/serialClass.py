@@ -136,7 +136,7 @@ class Serial(object):
                 plist_0 = list(plist[0])
                 serialName = plist_0[0]
             else:
-                serialName = "COM3"
+                serialName = "COM7"
             self.serialFd = serial.Serial(serialName, 115200, timeout=60)
             logger.info("check which port was really used >" + self.serialFd.name)
 
@@ -177,10 +177,6 @@ class Serial(object):
                     logger.info("move_status: " + tempStr[startIndex + 12])
                     globalVariable.set_nav_status(tempStr[startIndex + 12])
 
-                # if "nav:pose" in tempStr:
-                #     logger.info("nav:pose: " + tempStr[7:-2])
-                #     globalVariable.initPoint.append(tempStr[7:-2])
-
                 if "get_max_vel" in tempStr:
                     logger.info("Get Current Speed >" + tempStr)
 
@@ -201,7 +197,9 @@ class Serial(object):
 
                     if "nav:pose" in tempStr:
                         logger.info("当前位置信息: " + self.availableDataList[-1])
-                        return self.availableDataList[-1]
+                        logger.info("nav:pose> " + self.availableDataList[-1][8:])
+                        globalVariable.angle = self.availableDataList[-1][13:-2]
+                        self.availableDataList = []
                     elif "set_flag_point" in tempStr:
                         logger.info("给定目标点名称导航: " + self.availableDataList[-1])
                     elif "point" in tempStr:
@@ -245,3 +243,11 @@ class Serial(object):
     # 取消导航
     def cancelGuide(self):
         self.sendMessage("cancel_goal")
+
+    # 移动机器人
+    def moveRobot(self, distance, angle, speed):
+        self.sendMessage("move[{0},{1},{2}]".format(distance, angle, speed))
+
+    # 获取某个标定点位置信息
+    def getSetTargetPoint(self, targetName):
+        self.sendMessage("nav:get_flag_point{0}".format(targetName))

@@ -15,9 +15,8 @@ def _init():  # 初始化
     global _global_dict
     global _event
     global _position_name_list
+    global _position_name_dict
     global position_name
-    global GlobalHttp
-    global _position_list_len
     global _navStatus
     global mojaSerial
     global session_id
@@ -38,10 +37,13 @@ def _init():  # 初始化
     global sensorCount
     # Lora通信实例
     global loraSerial
+    # 运动旋转角度
+    global angle
 
     _global_dict = {}
     _event = threading.Event()
     _position_name_list = []
+    _position_name_dict = {}
     position_name = ""
     _position_list_len = 0
     _navStatus = "0"
@@ -56,6 +58,7 @@ def _init():  # 初始化
     easy_count = 0
     hard_count = 0
     initTime = 0
+    angle = 0
     # shootRobotServer = TcpServer()
     sensorCount = SensorCount()
     loraSerial = LoraSerial()
@@ -70,10 +73,7 @@ def set_nav_status(currentStatus):
     _navStatus = currentStatus
 
 
-def get_position_list_len():
-    return _position_list_len
-
-
+# 随机获取标定点名称
 def get_position_name():
     global position_name
     while 1:
@@ -86,18 +86,17 @@ def get_position_name():
     return position_name
 
 
-def set_position_name_by_serial(serial_list):
-    for key in serial_list:
+# 通过标定点名称获取坐标信息
+def get_position_XYZ_by_name(positionName):
+    return _position_name_dict[positionName]
+
+
+def set_position_name_by_serial(serial_dict):
+    _position_name_list.clear()
+    _position_name_dict.clear()
+    for key in serial_dict:
         _position_name_list.append(key)
-
-
-def set_position_name():
-    for key in GlobalHttp.get_target_list():
-        _position_name_list.append(key)
-
-
-def get_position_list():
-    return GlobalHttp.get_target_list()
+        _position_name_dict[key] = serial_dict[key]
 
 
 def set_value(key, value):
