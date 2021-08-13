@@ -1,0 +1,5 @@
+b'\xff'
+b'\xaaT\x0blaser[0.39]p'
+b'\xff'
+b'\xaaT\x0blaser[0.49]w'
+b'\xaaT\x0blaser[0.44]z'

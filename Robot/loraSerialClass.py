@@ -18,7 +18,7 @@ class LoraSerial(object):
     _instance_lock = threading.Lock()
 
     def __init__(self):
-        self.serialFd = serial.Serial("COM8", 9600)
+        self.serialFd = serial.Serial("COM2", 9600)
         self.initTime = 0
         self.master = modbus_rtu.RtuMaster(self.serialFd)
         self.master.set_timeout(5.0)

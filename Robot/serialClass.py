@@ -34,6 +34,7 @@ class Serial(object):
         self.initTargetList = {}
         self.availableDataList = []
         self.getAvailableSerialList()
+        self.powerOn()
         self.recvMessage()
         self.connectWifi()
         self.recvMessage()
@@ -136,7 +137,7 @@ class Serial(object):
                 plist_0 = list(plist[0])
                 serialName = plist_0[0]
             else:
-                serialName = "COM7"
+                serialName = "COM12"
             self.serialFd = serial.Serial(serialName, 115200, timeout=60)
             logger.info("check which port was really used >" + self.serialFd.name)
 
@@ -251,3 +252,6 @@ class Serial(object):
     # 获取某个标定点位置信息
     def getSetTargetPoint(self, targetName):
         self.sendMessage("nav:get_flag_point{0}".format(targetName))
+
+    def powerOn(self):
+        self.sendMessage("sys:lock")

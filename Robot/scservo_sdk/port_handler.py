@@ -6,7 +6,7 @@ import sys
 import platform
 
 LATENCY_TIMER = 16
-DEFAULT_BAUDRATE = 1000000
+DEFAULT_BAUDRATE = 115200
 
 
 class PortHandler(object):

@@ -12,6 +12,7 @@ from mapRouteSettingMode import mapRouteSettingMode
 from positionInformationFromChassisMode import positionInformationFromChassisMode
 from scoreMode import scoreMode
 import globalVariable
+from tcpClient import tcpWeb
 
 
 def sensorCount():
@@ -62,11 +63,13 @@ if __name__ == '__main__':
     mapRouteSetting = threading.Thread(target=mapRouteSettingMode)
     # speechRecognition = threading.Thread(target=speechRecognitionMode)
     positionInformationFromChassis = threading.Thread(target=positionInformationFromChassisMode)
+    tcpClient = threading.Thread(target=tcpWeb)
     # speechRecognition.setName("speechRecognition")
     # actionControl.setName("actionControl")
     lora.setName("lora")
     sensor.setName("sensor")
     score.setName("score")
+    tcpClient.setName("tcpClient")
     # tcpServer.setName("tcpServer")
     dualRobotInteraction.setName("dualRobotInteraction")
     mapRouteSetting.setName("mapRouteSetting")
@@ -83,6 +86,7 @@ if __name__ == '__main__':
     threads.append(lora)
     threads.append(sensor)
     threads.append(score)
+    threads.append(tcpClient)
     # threads.append(tcpServer)
     threads.append(mapRouteSetting)
     threads.append(dualRobotInteraction)
