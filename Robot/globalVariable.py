@@ -22,6 +22,8 @@ def _init():  # 初始化
     global session_id
     global moveStatus
     global initPoint
+    # 上次得分
+    global lastScore
     # 红黄蓝得分
     global redScore
     global yellowScore
@@ -51,6 +53,7 @@ def _init():  # 初始化
     mojaSerial = Serial()
     moveStatus = 0  # 0是未运动;1是运动中;
     initPoint = []
+    lastScore = 0
     redScore = 0
     yellowScore = 0
     blueScore = 0
@@ -100,6 +103,7 @@ def set_position_name_by_serial(serial_dict):
 
 
 def set_value(key, value):
+    global _global_dict
     """ 定义一个全局变量 """
     _global_dict[key] = value
 

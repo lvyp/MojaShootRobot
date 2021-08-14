@@ -10,7 +10,6 @@
 
 import os
 
-
 if os.name == 'nt':
     import msvcrt
     def getch():

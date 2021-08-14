@@ -50,8 +50,10 @@ class SensorCount(object):
         returnValue = False
         self.GetPortVal(0xA00, self.ReadValue_Gpi1, 1)
         self.GetPortVal(0xA04, self.ReadValue_Gpi7, 1)
+        # print("GPI1>" + str(self.ReadValue_Gpi1.value))
+        # print("GPI7>" + str(self.ReadValue_Gpi7.value))
         # Gpi1或Gpi7有一个传感器返回0，即得分
-        if (int(self.ReadValue_Gpi1.value) & 0x08 == 0) or \
-                (int(self.ReadValue_Gpi7.value) & 0x01 == 0):
+        if (int(self.ReadValue_Gpi7.value) & 0x08 == 0) or \
+                (int(self.ReadValue_Gpi1.value) & 0x01 == 0):
             returnValue = True
         return returnValue

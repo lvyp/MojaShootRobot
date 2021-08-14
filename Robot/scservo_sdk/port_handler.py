@@ -6,6 +6,7 @@ import sys
 import platform
 
 LATENCY_TIMER = 16
+
 DEFAULT_BAUDRATE = 115200
 
 

@@ -187,7 +187,6 @@ class CanMotor(object):
         if ret != STATUS_OK:
             print('CAN1通道_12发送失败\r\n')
 
-
     def MOTOR_Ctr(self, MOTOR_ADDR, POS):
 
         POS = float(POS)

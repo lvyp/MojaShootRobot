@@ -5,11 +5,9 @@
 # @File : positionInformationFromChassisMode.py
 # @Software: PyCharm
 
-import math
 import threading
 
 from playsound import playsound
-from serialClass import Serial
 import globalVariable
 from loggerMode import logger
 
@@ -50,13 +48,19 @@ def positionInformationFromChassisMode():
         # logger.info("线程：" + threading.current_thread().name + " Id:" + str(threading.get_ident()))
         rLock.acquire()
         # 获取位置信息被触发才会从底层获取当前位置信息
-        if globalVariable.get_value("positionInformationFromChassisFlag") is True:
+        if globalVariable.get_value("positionInformationFromChassisFlag"):
             # logger.info("底盘交互模块底层发送数据：实时获取位置信息")
             getPositionAndStartPlot("positionInformationFromChassisFlag", "mapRouteSettingFlag")
-        elif globalVariable.get_value("positionInformationFromChassisInitPointFlag") is True:
+        elif globalVariable.get_value("positionInformationFromChassisInitPointFlag"):
             getPositionAndStartPlot("positionInformationFromChassisInitPointFlag", "mapRouteSettingInitPointFlag")
         else:
             # logger.info("什么都不做")
             pass
         event.set()
         rLock.release()
+
+
+if __name__ == "__main__":
+    globalVariable._init()
+    globalVariable.set_value("positionInformationFromChassisFlag", True)
+    positionInformationFromChassisMode()

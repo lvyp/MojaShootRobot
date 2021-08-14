@@ -137,7 +137,7 @@ class Serial(object):
                 plist_0 = list(plist[0])
                 serialName = plist_0[0]
             else:
-                serialName = "COM12"
+                serialName = "COM13"
             self.serialFd = serial.Serial(serialName, 115200, timeout=60)
             logger.info("check which port was really used >" + self.serialFd.name)
 
@@ -199,8 +199,10 @@ class Serial(object):
                     if "nav:pose" in tempStr:
                         logger.info("当前位置信息: " + self.availableDataList[-1])
                         logger.info("nav:pose> " + self.availableDataList[-1][8:])
-                        globalVariable.angle = self.availableDataList[-1][13:-2]
-                        self.availableDataList = []
+                        if "]" in self.availableDataList[-1][8:]:
+                            globalVariable.angle = self.availableDataList[-1].replace("[", "").replace("]", "").split(",")[2]
+                            print(globalVariable.angle)
+                            self.availableDataList = []
                     elif "set_flag_point" in tempStr:
                         logger.info("给定目标点名称导航: " + self.availableDataList[-1])
                     elif "point" in tempStr:
@@ -227,7 +229,7 @@ class Serial(object):
 
     # 获取机器人当前位置
     def getPose(self):
-        self.sendMessage("get_pose")
+        self.sendMessage("nav:get_pose")
 
     # 获取当前最大速度
     def getMaxVel(self):

@@ -1,0 +1,70 @@
+{
+	"MoJa": [
+		{
+			"time": 1,
+			"sub_time_child": 0.0,
+			"action_child": "无",
+			"sub_time_old": 0.0,
+			"action_old": "无",
+			"dialogue": "./tts/simple_plot/1.wav",
+			"dialogue_content": "啊！是谁！",
+			"duration": 1.98,
+			"current_human": "小竹"
+		},
+		{
+			"time": 3.4,
+			"sub_time_child": 0.0,
+			"action_child": "无",
+			"sub_time_old": 0.0,
+			"action_old": "无",
+			"dialogue": "./tts/simple_plot/2.wav",
+			"dialogue_content": "哈欠",
+			"duration": 1.44,
+			"current_human": "老竹"
+		},
+		{
+			"time": 5.3,
+			"sub_time_child": 0.0,
+			"action_child": "无",
+			"sub_time_old": 0.0,
+			"action_old": "无",
+			"dialogue": "./tts/simple_plot/3.wav",
+			"dialogue_content": "你看见谁打的么？",
+			"duration": 1.944,
+			"current_human": "小竹"
+		},
+		{
+			"time": 7.7,
+			"sub_time_child": 0.0,
+			"action_child": "无",
+			"sub_time_old": 0.0,
+			"action_old": "无",
+			"dialogue": "./tts/simple_plot/4.wav",
+			"dialogue_content": "哈~欠",
+			"duration": 1.44,
+			"current_human": "老竹"
+		},
+		{
+			"time": 9.6,
+			"sub_time_child": 0.0,
+			"action_child": "无",
+			"sub_time_old": 0.0,
+			"action_old": "无",
+			"dialogue": "./tts/simple_plot/5.wav",
+			"dialogue_content": "爷爷，快醒醒，赶紧跑啊！",
+			"duration": 3.168,
+			"current_human": "小竹"
+		},
+		{
+			"time": 13.1,
+			"sub_time_child": 0.0,
+			"action_child": "无",
+			"sub_time_old": 0.0,
+			"action_old": "无",
+			"dialogue": "./tts/simple_plot/6.wav",
+			"dialogue_content": "好嘞好嘞",
+			"duration": 1.872,
+			"current_human": "老竹"
+		}
+	]
+}

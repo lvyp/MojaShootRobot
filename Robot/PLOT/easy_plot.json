@@ -1,0 +1,125 @@
+{
+	"MoJa": [
+		{
+			"time": 1,
+			"sub_time_child": 0.0,
+			"action_child": "无",
+			"sub_time_old": 0.0,
+			"action_old": "无",
+			"dialogue": "./tts/easy_plot/1.wav",
+			"dialogue_content": "爷爷，他们打的我好疼",
+			"duration": 2.808,
+			"current_human": "小竹"
+		},
+		{
+			"time": 4.3,
+			"sub_time_child": 0.0,
+			"action_child": "无",
+			"sub_time_old": 0.0,
+			"action_old": "无",
+			"dialogue": "./tts/easy_plot/2.wav",
+			"dialogue_content": "他还是个孩子啊。",
+			"duration": 2.376,
+			"current_human": "老竹"
+		},
+		{
+			"time": 7,
+			"sub_time_child": 0.0,
+			"action_child": "无",
+			"sub_time_old": 0.0,
+			"action_old": "无",
+			"dialogue": "./tts/easy_plot/3.wav",
+			"dialogue_content": "你们冲我来。",
+			"duration": 1.692,
+			"current_human": "老竹"
+		},
+		{
+			"time": 9,
+			"sub_time_child": 0.0,
+			"action_child": "无",
+			"sub_time_old": 0.0,
+			"action_old": "无",
+			"dialogue": "./tts/easy_plot/4.wav",
+			"dialogue_content": "别打爷爷。打我吧",
+			"duration": 2.736,
+			"current_human": "小竹"
+		},
+		{
+			"time": 12,
+			"sub_time_child": 0.0,
+			"action_child": "无",
+			"sub_time_old": 0.0,
+			"action_old": "无",
+			"dialogue": "./tts/easy_plot/5.wav",
+			"dialogue_content": "放过那个孩子，像我开炮",
+			"duration": 3.852,
+			"current_human": "老竹"
+		},
+		{
+			"time": 16.3,
+			"sub_time_child": 0.0,
+			"action_child": "无",
+			"sub_time_old": 0.0,
+			"action_old": "无",
+			"dialogue": "./tts/easy_plot/6.wav",
+			"dialogue_content": "爷爷，咱们快跑吧",
+			"duration": 2.376,
+			"current_human": "小竹"
+		},
+		{
+			"time": 19,
+			"sub_time_child": 0.0,
+			"action_child": "无",
+			"sub_time_old": 0.0,
+			"action_old": "无",
+			"dialogue": "./tts/easy_plot/7.wav",
+			"dialogue_content": "好嘞，大孙子，坐稳了",
+			"duration": 3.528,
+			"current_human": "老竹"
+		},
+		{
+			"time": 23,
+			"sub_time_child": 0.0,
+			"action_child": "无",
+			"sub_time_old": 0.0,
+			"action_old": "无",
+			"dialogue": "./tts/easy_plot/8.wav",
+			"dialogue_content": "爷爷，怎么感觉还是之前的速度呀",
+			"duration": 3.636,
+			"current_human": "小竹"
+		},
+		{
+			"time": 27,
+			"sub_time_child": 0.0,
+			"action_child": "无",
+			"sub_time_old": 0.0,
+			"action_old": "无",
+			"dialogue": "./tts/easy_plot/9.wav",
+			"dialogue_content": "爷爷，岁数大了。跑不动了。",
+			"duration": 4.284,
+			"current_human": "老竹"
+		},
+		{
+			"time": 31.7,
+			"sub_time_child": 0.0,
+			"action_child": "无",
+			"sub_time_old": 0.0,
+			"action_old": "无",
+			"dialogue": "./tts/easy_plot/10.wav",
+			"dialogue_content": "不要打我们了好不好",
+			"duration": 2.556,
+			"current_human": "小竹"
+		},
+		{
+			"time": 34.7,
+			"sub_time_child": 0.0,
+			"action_child": "无",
+			"sub_time_old": 0.0,
+			"action_old": "无",
+			"dialogue": "./tts/easy_plot/11.wav",
+			"dialogue_content": "大侠，饶命啊。炮下留情啊",
+			"duration": 4.932,
+			"current_human": "老竹"
+		}
+	]
+}

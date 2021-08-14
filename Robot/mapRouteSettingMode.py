@@ -19,17 +19,17 @@ def mapRouteSettingMode():
         # logger.info("线程：" + threading.current_thread().name + " Id:" + str(threading.get_ident()))
         event.wait()
         rLock.acquire()
-        if globalVariable.get_value("mapRouteSettingFlag") is True:
-            logger.info("地图设置向模块底层发送数据")
+        if globalVariable.get_value("mapRouteSettingFlag"):
+            logger.info("游戏开始>>>地图设置向模块底层发送数据")
             # 取消初始位置运动导航
             globalVariable.mojaSerial.cancelGuide()
             # 发送游戏点位位置名称
             globalVariable.mojaSerial.sendMessage("point[{0}]".format(globalVariable.get_position_name()))
             print("point[{0}]".format(globalVariable.get_position_name()))
-            # globalVariable.moveStatus = 1  # 设置机器人运动状态为运动中，运动中不会进行声源定位
             globalVariable.set_value("positionInformationFromChassisFlag", True)
             globalVariable.set_value("mapRouteSettingFlag", False)
-        elif globalVariable.get_value("mapRouteSettingInitPointFlag") is True:
+        elif globalVariable.get_value("mapRouteSettingInitPointFlag"):
+            logger.info("游戏结束>>>地图设置向模块底层发送数据")
             # 取消初始位置运动导航
             globalVariable.mojaSerial.cancelGuide()
             # 初始位置固定点位进行移动
@@ -38,7 +38,6 @@ def mapRouteSettingMode():
             # globalVariable.mojaSerial.sendMessage("point[charging_pile]")
             # # 直接对接充电桩充电
             # globalVariable.mojaSerial.justCharge()
-            # globalVariable.moveStatus = 1  # 设置机器人运动状态为运动中，运动中不会进行声源定位
             globalVariable.set_value("mapRouteSettingInitPointFlag", False)
             globalVariable.set_value("positionInformationFromChassisInitPointFlag", True)
         else:

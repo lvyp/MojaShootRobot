@@ -1,0 +1,235 @@
+{
+	"MoJa": [
+		{
+			"time": 1,
+			"sub_time_child": 0.0,
+			"action_child": "无",
+			"sub_time_old": 0.0,
+			"action_old": "无",
+			"dialogue": "./tts/hard_plot/1.wav",
+			"dialogue_content": "哇～啊！我生气了！",
+			"duration": 2.376,
+			"current_human": "小竹"
+		},
+		{
+			"time": 3.5,
+			"sub_time_child": 0.0,
+			"action_child": "无",
+			"sub_time_old": 0.0,
+			"action_old": "无",
+			"dialogue": "./tts/hard_plot/2.wav",
+			"dialogue_content": "哇～啊！我生气了！",
+			"duration": 2.952,
+			"current_human": "老竹"
+		},
+		{
+			"time": 6.7,
+			"sub_time_child": 0.0,
+			"action_child": "无",
+			"sub_time_old": 0.0,
+			"action_old": "无",
+			"dialogue": "./tts/hard_plot/4.wav",
+			"dialogue_content": "让你看看我的厉害！",
+			"duration": 2.052,
+			"current_human": "小竹"
+		},
+		{
+			"time": 9,
+			"sub_time_child": 0.0,
+			"action_child": "无",
+			"sub_time_old": 0.0,
+			"action_old": "无",
+			"dialogue": "./tts/hard_plot/13.wav",
+			"dialogue_content": "让你看看我的厉害！",
+			"duration": 2.376,
+			"current_human": "老竹"
+		},
+		{
+			"time": 11.5,
+			"sub_time_child": 0.0,
+			"action_child": "无",
+			"sub_time_old": 0.0,
+			"action_old": "无",
+			"dialogue": "./tts/hard_plot/14.wav",
+			"dialogue_content": "你怎么在学我说话！",
+			"duration": 2.052,
+			"current_human": "小竹"
+		},
+		{
+			"time": 14,
+			"sub_time_child": 0.0,
+			"action_child": "无",
+			"sub_time_old": 0.0,
+			"action_old": "无",
+			"dialogue": "./tts/hard_plot/15.wav",
+			"dialogue_content": "你怎么在学我说话！",
+			"duration": 2.664,
+			"current_human": "老竹"
+		},
+		{
+			"time": 17,
+			"sub_time_child": 0.0,
+			"action_child": "无",
+			"sub_time_old": 0.0,
+			"action_old": "无",
+			"dialogue": "./tts/hard_plot/16.wav",
+			"dialogue_content": "竹小剑最帅",
+			"duration": 1.548,
+			"current_human": "小竹"
+		},
+		{
+			"time": 21,
+			"sub_time_child": 0.0,
+			"action_child": "无",
+			"sub_time_old": 0.0,
+			"action_old": "无",
+			"dialogue": "./tts/hard_plot/17.wav",
+			"dialogue_content": "你怎么不模仿我了",
+			"duration": 2.16,
+			"current_human": "小竹"
+		},
+		{
+			"time": 23.5,
+			"sub_time_child": 0.0,
+			"action_child": "无",
+			"sub_time_old": 0.0,
+			"action_old": "无",
+			"dialogue": "./tts/hard_plot/18.wav",
+			"dialogue_content": "你怎么不模仿我了",
+			"duration": 2.448,
+			"current_human": "老竹"
+		},
+		{
+			"time": 26.4,
+			"sub_time_child": 0.0,
+			"action_child": "无",
+			"sub_time_old": 0.0,
+			"action_old": "无",
+			"dialogue": "./tts/hard_plot/21.wav",
+			"dialogue_content": "气死我了",
+			"duration": 1.476,
+			"current_human": "小竹"
+		},
+		{
+			"time": 28.3,
+			"sub_time_child": 0.0,
+			"action_child": "无",
+			"sub_time_old": 0.0,
+			"action_old": "无",
+			"dialogue": "./tts/hard_plot/22.wav",
+			"dialogue_content": "气死我了",
+			"duration": 1.764,
+			"current_human": "老竹"
+		},
+		{
+			"time": 30.5,
+			"sub_time_child": 0.0,
+			"action_child": "无",
+			"sub_time_old": 0.0,
+			"action_old": "无",
+			"dialogue": "./tts/hard_plot/23.wav",
+			"dialogue_content": "快打他们",
+			"duration": 1.404,
+			"current_human": "小竹"
+		},
+		{
+			"time": 32.4,
+			"sub_time_child": 0.0,
+			"action_child": "无",
+			"sub_time_old": 0.0,
+			"action_old": "无",
+			"dialogue": "./tts/hard_plot/24.wav",
+			"dialogue_content": "我没有手",
+			"duration": 1.656,
+			"current_human": "老竹"
+		},
+		{
+			"time": 34.5,
+			"sub_time_child": 0.0,
+			"action_child": "无",
+			"sub_time_old": 0.0,
+			"action_old": "无",
+			"dialogue": "./tts/hard_plot/25.wav",
+			"dialogue_content": "那咱们撞上去！",
+			"duration": 1.8,
+			"current_human": "小竹"
+		},
+		{
+			"time": 36.8,
+			"sub_time_child": 0.0,
+			"action_child": "无",
+			"sub_time_old": 0.0,
+			"action_old": "无",
+			"dialogue": "./tts/hard_plot/26.wav",
+			"dialogue_content": "用谁的头",
+			"duration": 1.692,
+			"current_human": "老竹"
+		},
+		{
+			"time": 39,
+			"sub_time_child": 0.0,
+			"action_child": "无",
+			"sub_time_old": 0.0,
+			"action_old": "无",
+			"dialogue": "./tts/hard_plot/27.wav",
+			"dialogue_content": "你的",
+			"duration": 0.9,
+			"current_human": "小竹"
+		},
+		{
+			"time": 40.4,
+			"sub_time_child": 0.0,
+			"action_child": "无",
+			"sub_time_old": 0.0,
+			"action_old": "无",
+			"dialogue": "./tts/hard_plot/28.wav",
+			"dialogue_content": "你的",
+			"duration": 1.08,
+			"current_human": "老竹"
+		},
+		{
+			"time": 42,
+			"sub_time_child": 0.0,
+			"action_child": "无",
+			"sub_time_old": 0.0,
+			"action_old": "无",
+			"dialogue": "./tts/hard_plot/29.wav",
+			"dialogue_content": "停！我有个好建议！开启自曝模式，把这炸了！",
+			"duration": 5.796,
+			"current_human": "小竹"
+		},
+		{
+			"time": 48.3,
+			"sub_time_child": 0.0,
+			"action_child": "无",
+			"sub_time_old": 0.0,
+			"action_old": "无",
+			"dialogue": "./tts/hard_plot/30.wav",
+			"dialogue_content": "好，自曝模式，3，2",
+			"duration": 4.176,
+			"current_human": "老竹"
+		},
+		{
+			"time": 53,
+			"sub_time_child": 0.0,
+			"action_child": "无",
+			"sub_time_old": 0.0,
+			"action_old": "无",
+			"dialogue": "./tts/hard_plot/31.wav",
+			"dialogue_content": "诶诶诶，还是算了吧，你自爆了我也死了。",
+			"duration": 4.284,
+			"current_human": "小竹"
+		},
+		{
+			"time": 57.8,
+			"sub_time_child": 0.0,
+			"action_child": "无",
+			"sub_time_old": 0.0,
+			"action_old": "无",
+			"dialogue": "./tts/hard_plot/32.wav",
+			"dialogue_content": "不好意思，没电了，爆炸失败",
+			"duration": 4.212,
+			"current_human": "老竹"
+		}
+	]
+}

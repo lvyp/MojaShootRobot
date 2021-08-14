@@ -6,8 +6,6 @@
 # @Software: PyCharm
 import math
 import os
-import time
-import datetime
 import json
 import threading
 import globalVariable
@@ -119,6 +117,7 @@ def dualRobotInteractionMode():
     # 双机器人互动模块：设置对话情景，根据机器人对话情景，发送相应的指令到动作模块
     logger.info("双机器人互动模块入口")
     event = globalVariable.get_event()
+    # event.set()
     rLock = threading.RLock()
     while 1:
         # logger.info("线程：" + threading.current_thread().name + " Id:" + str(threading.get_ident()))
@@ -129,3 +128,9 @@ def dualRobotInteractionMode():
         # 代码实现部分
         rLock.release()
         event.clear()
+
+
+if __name__ == "__main__":
+    globalVariable._init()
+    globalVariable.set_value("hard_plot", True)
+    dualRobotInteractionMode()
