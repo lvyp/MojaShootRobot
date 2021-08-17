@@ -43,7 +43,7 @@ def parsePlot(jsonPath):
         timeFlag = 0
         childTimeFlag = 0
         oldTimeFlag = 0
-        print(plot["dialogue"])
+        # print(plot["dialogue"])
         while True:
             currentTime = timerMachine(startTime)
 
@@ -57,28 +57,28 @@ def parsePlot(jsonPath):
                 del tempDict["sub_time_old"]
 
             # print(currentTime)
-            # if math.isclose(plot["time"], currentTime, abs_tol=0.010) and timeFlag == 0:
             if plot["time"] <= currentTime and timeFlag == 0:
                 timeFlag += 1
                 del tempDict["time"]
                 if plot["dialogue"] != "":
                     # PlayVoice(plot["dialogue"])
                     LRTrack.get_audio_devices_all_msg_dict(plot["dialogue"], currentHuman)
-            # if math.isclose(plot["sub_time_child"], currentTime, abs_tol=0.010) and childTimeFlag == 0:
             if plot["sub_time_child"] <= currentTime and childTimeFlag == 0:
                 childTimeFlag += 1
                 del tempDict["sub_time_child"]
                 if plot["action_child"] != "":
-                    print("action_child")
+                    # print("action_child")
+                    pass
             # if math.isclose(plot["sub_time_old"], currentTime, abs_tol=0.010) and oldTimeFlag == 0:
             if plot["sub_time_old"] <= currentTime and oldTimeFlag == 0:
                 oldTimeFlag += 1
                 del tempDict["sub_time_old"]
                 if plot["action_old"] != "":
-                    print("action_old")
+                    # print("action_old")
+                    pass
 
             if len(tempDict) == 0:
-                print("len(tempDict): " + str(len(tempDict)))
+                # print("len(tempDict): " + str(len(tempDict)))
                 break
             else:
                 # print(currentTime)
@@ -117,7 +117,7 @@ def dualRobotInteractionMode():
     # 双机器人互动模块：设置对话情景，根据机器人对话情景，发送相应的指令到动作模块
     logger.info("双机器人互动模块入口")
     event = globalVariable.get_event()
-    # event.set()
+    event.set()
     rLock = threading.RLock()
     while 1:
         # logger.info("线程：" + threading.current_thread().name + " Id:" + str(threading.get_ident()))

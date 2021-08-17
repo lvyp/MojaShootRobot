@@ -66,20 +66,20 @@ class ComMotor(object):
 
         # Open port
         if self.portHandler.openPort():
-            print("Succeeded to open the port")
+            # print("Succeeded to open the port")
+            pass
         else:
             print("Failed to open the port")
             print("Press any key to terminate...")
-            # getch()
             quit()
 
         # Set port baudrate
         if self.portHandler.setBaudRate(BAUDRATE):
-            print("Succeeded to change the baudrate")
+            # print("Succeeded to change the baudrate")
+            pass
         else:
             print("Failed to change the baudrate")
             print("Press any key to terminate...")
-            # getch()
             quit()
 
     def close(self, SCS_ID):
@@ -92,13 +92,13 @@ class ComMotor(object):
         self.portHandler.closePort()
 
     def action(self, SCS_ID, degree):
-
+        print("SCS_ID>" + str(SCS_ID))
         SCS_MINIMUM_POSITION_VALUE  = int(float(degree)/0.088)       # SCServo will rotate between this value  (0 - 16)
         SCS_MOVING_SPEED            = 1000           # SCServo moving speed
         SCS_MOVING_ACC              = 100           # SCServo moving acc
 
         strL = bitOperation(SCS_MINIMUM_POSITION_VALUE)
-        print(str(strL))
+        # print(str(strL))
 
         # Write SCServo acc
         scs_comm_result, scs_error = self.packetHandler.write1ByteTxRx(self.portHandler, SCS_ID, ADDR_SCS_GOAL_ACC, SCS_MOVING_ACC)
@@ -119,22 +119,24 @@ class ComMotor(object):
         # Write SCServo goal position
         scs_comm_result, scs_error = self.packetHandler.write2ByteTxRx(self.portHandler, SCS_ID, ADDR_SCS_GOAL_POSITION, strL)
         if scs_comm_result != COMM_SUCCESS:
+            print("scs_comm_result>" + str(scs_comm_result))
             print("%s" % self.packetHandler.getTxRxResult(scs_comm_result))
         elif scs_error != 0:
+            print("scs_error>" + str(scs_error))
             print("%s" % self.packetHandler.getRxPacketError(scs_error))
-        scs_present_position_speed, scs_comm_result, scs_error = self.packetHandler.read4ByteTxRx(self.portHandler, SCS_ID, ADDR_SCS_PRESENT_POSITION)
-        scs_present_position = SCS_LOWORD(scs_present_position_speed)
-        scs_present_speed = SCS_HIWORD(scs_present_position_speed)
-        print("[ID:%03d] GoalPos:%03d PresPos:%03d PresSpd:%03d"
-           % (SCS_ID, bitOperation(strL)*0.088, bitOperation(scs_present_position)*0.088, SCS_TOHOST(scs_present_speed, 15)))
-        # time.sleep(1.5)
+        # scs_present_position_speed, scs_comm_result, scs_error = self.packetHandler.read4ByteTxRx(self.portHandler, SCS_ID, ADDR_SCS_PRESENT_POSITION)
+        # scs_present_position = SCS_LOWORD(scs_present_position_speed)
+        # scs_present_speed = SCS_HIWORD(scs_present_position_speed)
+        # print("[ID:%03d] GoalPos:%03d PresPos:%03d PresSpd:%03d"
+        #    % (SCS_ID, bitOperation(strL)*0.088, bitOperation(scs_present_position)*0.088, SCS_TOHOST(scs_present_speed, 15)))
+        # time.sleep(0.05)
 
 
 
 if __name__ == '__main__':
     m_comMotor = ComMotor("COM1")
     while 1:
-        for i in range(16):
+        for i in range(1, 16):
             m_comMotor.action(i, 360)
         time.sleep(5)
         for i in range(16):

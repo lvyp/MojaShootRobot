@@ -42,7 +42,8 @@ class CanMotor(object):
     def RUN_CAN(self):
         ret = canDLL.VCI_OpenDevice(VCI_USBCAN2, 0, 0)
         if ret == STATUS_OK:
-            print('调用 VCI_OpenDevice成功\r\n')
+            # print('调用 VCI_OpenDevice成功\r\n')
+            pass
         if ret != STATUS_OK:
             print('调用 VCI_OpenDevice出错\r\n')
 
@@ -51,26 +52,30 @@ class CanMotor(object):
                                          0, 0x00, 0x14, 0)  # 波特率1000k，正常模式
         ret = canDLL.VCI_InitCAN(VCI_USBCAN2, 0, 0, byref(vci_initconfig))
         if ret == STATUS_OK:
-            print('调用 VCI_InitCAN1成功\r\n')
+            # print('调用 VCI_InitCAN1成功\r\n')
+            pass
         if ret != STATUS_OK:
             print('调用 VCI_InitCAN1出错\r\n')
 
         ret = canDLL.VCI_StartCAN(VCI_USBCAN2, 0, 0)
         if ret == STATUS_OK:
-            print('调用 VCI_StartCAN1成功\r\n')
+            # print('调用 VCI_StartCAN1成功\r\
+            pass
         if ret != STATUS_OK:
             print('调用 VCI_StartCAN1出错\r\n')
 
         # 初始1通道
         ret = canDLL.VCI_InitCAN(VCI_USBCAN2, 0, 1, byref(vci_initconfig))
         if ret == STATUS_OK:
-            print('调用 VCI_InitCAN2 成功\r\n')
+            # print('调用 VCI_InitCAN2 成功\r\n')
+            pass
         if ret != STATUS_OK:
             print('调用 VCI_InitCAN2 出错\r\n')
 
         ret = canDLL.VCI_StartCAN(VCI_USBCAN2, 0, 1)
         if ret == STATUS_OK:
-            print('调用 VCI_StartCAN2 成功\r\n')
+            # print('调用 VCI_StartCAN2 成功\r\n')
+            pass
         if ret != STATUS_OK:
             print('调用 VCI_StartCAN2 出错\r\n')
 
@@ -261,9 +266,11 @@ if __name__ == '__main__':
             canmotor.MOTOR_Ctr(16, -9000)
             time.sleep(TIME_OUT)
     else:
-        canmotor.MOTOR_Ctr(18, 25000)
-        time.sleep(TIME_OUT*10)
-        canmotor.MOTOR_Ctr(18, -25000)
+        # canmotor.MOTOR_Ctr(18, 0)
+        canmotor.MOTOR_Ctr(18, 45)
+        time.sleep(TIME_OUT*5)
+        canmotor.MOTOR_Ctr(18, -45)
+
 
 
     canDLL.VCI_CloseDevice(VCI_USBCAN2, 0)

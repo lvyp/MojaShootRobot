@@ -8,6 +8,7 @@
 import threading
 import time
 
+from actionMode import action
 from loggerMode import logger
 from dualRobotInteractionMode import dualRobotInteractionMode
 from mapRouteSettingMode import mapRouteSettingMode
@@ -44,12 +45,17 @@ if __name__ == '__main__':
     # 墨甲导览机器人启动入口
     logger.info("墨甲射击机器人启动入口")
     globalVariable._init()
+    #设置表情初始化
+    action(globalVariable.get_comMotor(), globalVariable.get_canMotor(), "init")
 
-    globalVariable.set_value("scoreFlag", True)
+    globalVariable.set_value("scoreFlag", False)
     globalVariable.set_value("actionFlag", False)
     globalVariable.set_value("mapRouteSettingFlag", False)
+    globalVariable.set_value("mapRouteSettingInitPointFlag", True)
     globalVariable.set_value("positionInformationFromChassisFlag", False)
     globalVariable.set_value("positionInformationFromChassisInitPointFlag", False)
+
+    globalVariable.set_position_name_by_serial(globalVariable.mojaSerial.get_init_target_list())
 
     # 设置线程组
     threads = []
@@ -78,7 +84,7 @@ if __name__ == '__main__':
     threads.append(lora)
     threads.append(sensor)
     threads.append(score)
-    threads.append(tcpClient)
+    # threads.append(tcpClient)
     # threads.append(tcpServer)
     threads.append(mapRouteSetting)
     threads.append(dualRobotInteraction)

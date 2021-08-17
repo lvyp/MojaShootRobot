@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
-
-import threading
-from enum import Enum
-
+from canMotor import CanMotor
+from comMotor import ComMotor
 from sensorCountMode import SensorCount
 
 from loraSerialClass import LoraSerial
@@ -41,6 +39,10 @@ def _init():  # 初始化
     global loraSerial
     # 运动旋转角度
     global angle
+    # can通信
+    global canMotor
+    # com通信
+    global comMotor
 
     _global_dict = {}
     _event = threading.Event()
@@ -62,9 +64,23 @@ def _init():  # 初始化
     hard_count = 0
     initTime = 0
     angle = 0
-    # shootRobotServer = TcpServer()
     sensorCount = SensorCount()
     loraSerial = LoraSerial()
+    comMotor = ComMotor("COM1")
+    canMotor = CanMotor()
+    canMotor.RUN_CAN()
+    canMotor.MOTOR_INIT(16)
+    canMotor.MOTOR_INIT(17)
+    canMotor.MOTOR_INIT(18)
+    # shootRobotServer = TcpServer()
+
+
+def get_comMotor():
+    return comMotor
+
+
+def get_canMotor():
+    return canMotor
 
 
 def get_nav_status():
@@ -83,10 +99,15 @@ def get_position_name():
         randomPosition = random.sample(_position_name_list, len(_position_name_list))
         if position_name != randomPosition[0]:
             position_name = randomPosition[0]
-            break
+            return position_name
         else:
-            pass
-    return position_name
+            print("start>")
+            print("0>" + str(randomPosition[0]))
+            print("1>"+ str(randomPosition[1]))
+            position_name = randomPosition[1]
+            print(position_name)
+            print("<end")
+            return position_name
 
 
 # 通过标定点名称获取坐标信息

@@ -101,11 +101,12 @@ expressionDict = {
 def action(comMotor, canMotor, expression):
 
     infoList = expressionDict[expression]
+    infoList = list(reversed(infoList))
     for info in infoList:
         if info['id'] < 16:
-            comMotor.action(info['id'], info['degree'])
+            comMotor.action(SCS_ID=info['id'], degree=info['degree'])
         else:
-            canMotor.MOTOR_Ctr(info['id'], info['degree'])
+            canMotor.MOTOR_Ctr(MOTOR_ADDR=info['id'], POS=info['degree'])
         time.sleep(TIMEOUT)
 
 

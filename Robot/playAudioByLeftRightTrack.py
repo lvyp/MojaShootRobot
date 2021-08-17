@@ -66,7 +66,7 @@ def get_audio_devices_all_msg_dict(rec_file_path, speakerName):
         for deviceId in this_tmp_dict[driver_name]:
             audio_drivers_and_channels_msg_dict[driver_name].append((deviceId, channels_list[deviceId]["name"]))
 
-    print(audio_drivers_and_channels_msg_dict)
+    # print(audio_drivers_and_channels_msg_dict)
     mapping_ch = mapping_stereo
     if speakerName == "小竹":
         mapping_ch = mapping_left_ch

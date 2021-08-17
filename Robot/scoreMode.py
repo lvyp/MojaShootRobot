@@ -4,13 +4,16 @@
 # @Site : Beijing
 # @File : scoreMode.py
 # @Software: PyCharm
+import time
+
 import globalVariable
+from actionMode import action
 from loggerMode import logger
 import threading
 from MoJaTimer import *
 
 
-def robotStatus():
+def robotStatus(comMotor, canMotor):
     # 计算总积分
     sumScore = globalVariable.blueScore
 
@@ -26,6 +29,8 @@ def robotStatus():
             and (globalVariable.simple_count == 0):
         # 播报次数设置:1,播报一次之后不再进行播报
         globalVariable.simple_count = 1
+        # 表情
+        action(comMotor, canMotor, "happy")
         # 对话播放
         print("simple_plot\n")
         globalVariable.set_value("simple_plot", True)
@@ -33,6 +38,8 @@ def robotStatus():
             and (globalVariable.easy_count == 0):
         # 播报次数设置:1,播报一次之后不再进行播报
         globalVariable.easy_count = 1
+        # 表情
+        action(globalVariable.get_comMotor(), globalVariable.get_canMotor(), "embarrassed")
         # 提升底盘速度
         globalVariable.mojaSerial.modifyMaxVel("0.6")
         # 对话播放
@@ -42,6 +49,8 @@ def robotStatus():
             and (globalVariable.hard_count == 0):
         # 播报次数设置:1,播报一次之后不再进行播报
         globalVariable.hard_count = 1
+        # 表情
+        action(globalVariable.get_comMotor(), globalVariable.get_canMotor(), "anger")
         # 提升底盘速度
         globalVariable.mojaSerial.modifyMaxVel("1.0")
         # 对话播放
@@ -50,11 +59,14 @@ def robotStatus():
         globalVariable.set_value("scoreFlag", False)
         # 将底盘运动速度降低
         globalVariable.mojaSerial.modifyMaxVel("0.3")
-        # 运动状态置位，未运动
-        globalVariable.moveStatus = 0
+        # 表情
+        action(globalVariable.get_comMotor(), globalVariable.get_canMotor(), "init")
         # 让机器人回到初始位置进行两点运动
+        globalVariable.set_position_name_by_serial(globalVariable.mojaSerial.get_init_target_list())
+        globalVariable.set_value("mapRouteSettingFlag", False)
         globalVariable.set_value("mapRouteSettingInitPointFlag", True)
         # 游戏结束，得分状态清空
+        globalVariable.lastScore = 0
         globalVariable.redScore = 0
         globalVariable.yellowScore = 0
         globalVariable.blueScore = 0
@@ -72,9 +84,17 @@ def scoreMode():
     logger.info("得分模块入口")
     event = globalVariable.get_event()
     rLock = threading.RLock()
+    comMotor = globalVariable.get_comMotor()
+    canMotor = globalVariable.get_canMotor()
     while 1:
         rLock.acquire()
         if globalVariable.get_value("scoreFlag"):
+            # print("lastScore>" + str(globalVariable.lastScore))
+            # print("blueScore>" + str(globalVariable.blueScore))
+            if globalVariable.get_value("first_start"):
+                globalVariable.blueScore = 0
+                globalVariable.loraSerial.modbusRtuSendMessage(globalVariable.blueScore)
+                globalVariable.set_value("first_start", False)
             # 判断是否得分，得分通过modbus rtu控制得分牌显示得分
             if globalVariable.lastScore == globalVariable.blueScore:
                 pass
@@ -82,7 +102,7 @@ def scoreMode():
                 globalVariable.loraSerial.modbusRtuSendMessage(globalVariable.blueScore)
 
             # 机器人状态变化
-            robotStatus()
+            robotStatus(comMotor, canMotor)
         else:
             pass
 

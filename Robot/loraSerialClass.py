@@ -4,6 +4,7 @@
 # @Site : Beijing
 # @File : loraSerialClass.py
 # @Software: PyCharm
+import json
 import threading
 import serial
 import globalVariable
@@ -31,36 +32,48 @@ class LoraSerial(object):
         return LoraSerial._instance
 
     def modbusRtuSendMessage(self, score):
-        self.master.execute(slave=1, function_code=cst.WRITE_MULTIPLE_REGISTERS,
-                            starting_address=20012, quantity_of_x=2, output_value=[score, 0])
+        try:
+            self.master.execute(slave=1, function_code=cst.WRITE_MULTIPLE_REGISTERS,
+                                starting_address=20012, quantity_of_x=2, output_value=[score, 0])
+        except Exception as e:
+            print(e)
 
     def loraRecvMessage(self):
         if self.serialFd.in_waiting:
             serStr = str(self.serialFd.read(self.serialFd.in_waiting))
+            print(">>>>>>" + serStr)
             serStr = serStr.replace("b'", "").replace("'", "")
-            print(serStr)
-            currentTime = timerMachine()
-            if serStr == "9527":
-                if self.initTime == 0:
-                    self.initTime = currentTime
+
+            if serStr != "":
+                data = json.loads(serStr)
+                # print(data)
+                currentTime = timerMachine()
+                if data["value"] == "on":
+                    if self.initTime == 0:
+                        self.initTime = currentTime
+                    else:
+                        pass
+                    # 240为游戏时长，单位秒
+                    if (currentTime - self.initTime) > 240:
+                        self.initTime = currentTime
+                    elif currentTime - self.initTime == 0:
+                        print("初次按钮触发")
+
+                    else:
+                        print("该时间段按钮触发无效")
+
+                    if currentTime - self.initTime == 0:
+                        globalVariable.set_position_name_by_serial(globalVariable.mojaSerial.get_target_list())
+                        globalVariable.set_value("mapRouteSettingInitPointFlag", False)
+                        globalVariable.set_value("mapRouteSettingFlag", True)
+                        globalVariable.set_value("scoreFlag", True)
+                        globalVariable.set_value("first_start", True)
+                        print("开启")
                 else:
                     pass
-                # 240为游戏时长，单位秒
-                if (currentTime - self.initTime) > 240:
-                    self.initTime = currentTime
-                elif currentTime - self.initTime == 0:
-                    print("初次按钮触发")
-
-                else:
-                    print("该时间段按钮触发无效")
-
-                if currentTime - self.initTime == 0:
-                    globalVariable.set_position_name_by_serial(globalVariable.mojaSerial.get_target_list())
-                    globalVariable.set_value("mapRouteSettingInitPointFlag", False)
-                    globalVariable.set_value("mapRouteSettingFlag", True)
-                    globalVariable.set_value("scoreFlag", True)
-                    print("开启")
+                data = {}
             else:
                 pass
+            serStr = ""
         else:
             pass

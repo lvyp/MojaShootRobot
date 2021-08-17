@@ -19,21 +19,25 @@ def mapRouteSettingMode():
         # logger.info("线程：" + threading.current_thread().name + " Id:" + str(threading.get_ident()))
         event.wait()
         rLock.acquire()
-        if globalVariable.get_value("mapRouteSettingFlag"):
+        if globalVariable.get_value("mapRouteSettingFlag") is True:
             logger.info("游戏开始>>>地图设置向模块底层发送数据")
             # 取消初始位置运动导航
             globalVariable.mojaSerial.cancelGuide()
             # 发送游戏点位位置名称
-            globalVariable.mojaSerial.sendMessage("point[{0}]".format(globalVariable.get_position_name()))
-            print("point[{0}]".format(globalVariable.get_position_name()))
+            goal_postion = globalVariable.get_position_name()
+            globalVariable.mojaSerial.sendMessage("point[{0}]".format(goal_postion))
+            print("point[{0}]".format(goal_postion))
             globalVariable.set_value("positionInformationFromChassisFlag", True)
             globalVariable.set_value("mapRouteSettingFlag", False)
-        elif globalVariable.get_value("mapRouteSettingInitPointFlag"):
+
+        elif globalVariable.get_value("mapRouteSettingInitPointFlag") is True:
             logger.info("游戏结束>>>地图设置向模块底层发送数据")
             # 取消初始位置运动导航
             globalVariable.mojaSerial.cancelGuide()
             # 初始位置固定点位进行移动
-            globalVariable.mojaSerial.sendMessage("point[{0}]".format(globalVariable.get_position_name()))
+            goal_postion = globalVariable.get_position_name()
+            globalVariable.mojaSerial.sendMessage("point[{0}]".format(goal_postion))
+            print("point[{0}]".format(goal_postion))
             # # 退回到充电桩位置
             # globalVariable.mojaSerial.sendMessage("point[charging_pile]")
             # # 直接对接充电桩充电

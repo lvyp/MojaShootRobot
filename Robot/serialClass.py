@@ -154,7 +154,11 @@ class Serial(object):
         parity = "{0:02x}".format(parityBit(Data))
         # 串口通信数据
         message = binascii.a2b_hex(frameHead + dataLen) + dataBody + binascii.a2b_hex(parity)
-        serStr = self.serialFd.write(message)
+        try:
+            serStr = self.serialFd.write(message)
+        except Exception as e:
+            print(str(e) + ">" + Data)
+            self.sendMessage(Data)
         # print(serStr)
 
     # 接收串口信息
@@ -192,16 +196,16 @@ class Serial(object):
 
                     if "lase" not in tempStr and "ver:" not in tempStr:
                         self.availableDataList.append(tempStr[4:4+dataAvailableLen])
-                        logger.info(tempStr[4:4+dataAvailableLen])
+                        # logger.info(tempStr[4:4+dataAvailableLen])
                     else:
                         pass
 
                     if "nav:pose" in tempStr:
-                        logger.info("当前位置信息: " + self.availableDataList[-1])
-                        logger.info("nav:pose> " + self.availableDataList[-1][8:])
+                        # logger.info("当前位置信息: " + self.availableDataList[-1])
+                        # logger.info("nav:pose> " + self.availableDataList[-1][8:])
                         if "]" in self.availableDataList[-1][8:]:
                             globalVariable.angle = self.availableDataList[-1].replace("[", "").replace("]", "").split(",")[2]
-                            print(globalVariable.angle)
+                            # print(globalVariable.angle)
                             self.availableDataList = []
                     elif "set_flag_point" in tempStr:
                         logger.info("给定目标点名称导航: " + self.availableDataList[-1])
