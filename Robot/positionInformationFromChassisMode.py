@@ -25,18 +25,38 @@ def PlayVoice(path):
 
 def getPositionAndStartPlot(flag, settingFlag):
     # 请求获取当前位置信息
-    # globalVariable.mojaSerial.getPose()
     globalVariable.mojaSerial.recvMessage()
+    # print("recvMessage>" + globalVariable.get_nav_status())
     if globalVariable.get_nav_status() == "2":
+        if settingFlag == "mapRouteSettingInitPointFlag":
+            globalVariable.set_value(settingFlag, False)
+            # 充电桩重定位
+            print("充电桩重定位")
+            globalVariable.mojaSerial.reloc(globalVariable.position_name)
+        else:
+            print("到达指定点位进行重定位")
+            globalVariable.get_position_XYZ_by_name(globalVariable.position_name)
+            globalVariable.set_value(settingFlag, True)
         globalVariable.set_value(flag, False)
-        globalVariable.set_value(settingFlag, True)
+        globalVariable.set_nav_status("0")
     elif globalVariable.get_nav_status() == "4":
         logger.info("有阻碍物！！！")
+        globalVariable.set_nav_status("0")
     elif globalVariable.get_nav_status() == "5":
         logger.info("有阻碍物！！！")
-    else:
+        globalVariable.set_nav_status("0")
+    elif globalVariable.get_nav_status() == "'":
+        globalVariable.set_value(flag, False)
+        globalVariable.set_value(settingFlag, True)
+        globalVariable.set_nav_status("0")
+    elif globalVariable.get_nav_status() == "0":
         pass
-    globalVariable.set_nav_status("0")
+    else:
+        print("getPositionAndStartPlot >> globalVariable.get_nav_status()=" + str(globalVariable.get_nav_status()))
+        globalVariable.set_value(flag, False)
+        globalVariable.set_value(settingFlag, True)
+        globalVariable.set_nav_status("0")
+    # print("recvMessage> out!!")
 
 
 def positionInformationFromChassisMode():
@@ -45,19 +65,22 @@ def positionInformationFromChassisMode():
     event = globalVariable.get_event()
     rLock = threading.RLock()
     while 1:
-        # logger.info("线程：" + threading.current_thread().name + " Id:" + str(threading.get_ident()))
-        rLock.acquire()
-        # 获取位置信息被触发才会从底层获取当前位置信息
-        if globalVariable.get_value("positionInformationFromChassisFlag"):
-            # logger.info("底盘交互模块底层发送数据：实时获取位置信息")
-            getPositionAndStartPlot("positionInformationFromChassisFlag", "mapRouteSettingFlag")
-        elif globalVariable.get_value("positionInformationFromChassisInitPointFlag"):
-            getPositionAndStartPlot("positionInformationFromChassisInitPointFlag", "mapRouteSettingInitPointFlag")
-        else:
-            # logger.info("什么都不做")
-            pass
-        event.set()
-        rLock.release()
+        try:
+            # logger.info("线程：" + threading.current_thread().name + " Id:" + str(threading.get_ident()))
+            rLock.acquire()
+            # 获取位置信息被触发才会从底层获取当前位置信息
+            if globalVariable.get_value("positionInformationFromChassisFlag"):
+                # logger.info("底盘交互模块底层发送数据：实时获取位置信息")
+                getPositionAndStartPlot("positionInformationFromChassisFlag", "mapRouteSettingFlag")
+            elif globalVariable.get_value("positionInformationFromChassisInitPointFlag"):
+                getPositionAndStartPlot("positionInformationFromChassisInitPointFlag", "mapRouteSettingInitPointFlag")
+            else:
+                # logger.info("什么都不做")
+                pass
+            event.set()
+            rLock.release()
+        except Exception as e:
+            print("positionInformationFromChassisMode >> " + str(e))
 
 
 if __name__ == "__main__":

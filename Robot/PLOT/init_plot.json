@@ -1,0 +1,114 @@
+{
+	"MoJa": [
+		{
+			"time": 0.1,
+			"sub_time_child": 0.1,
+			"action_child": "large_list",
+			"sub_time_old": 0.0,
+			"action_old": "无",
+			"dialogue": "./tts/HuVideo_Wav/1-1.wav",
+			"dialogue_content": "",
+			"duration": 18,
+			"current_human": "小竹"
+		},
+		{
+			"time": 0.1,
+			"sub_time_child": 0.0,
+			"action_child": "无",
+			"sub_time_old": 0.0,
+			"action_old": "无",
+			"dialogue": "./tts/HuVideo_Wav/1-2.wav",
+			"dialogue_content": "",
+			"duration": 18,
+			"current_human": "老竹"
+		},
+		{
+			"time": 1,
+			"sub_time_child": 1,
+			"action_child": "shutup_list",
+			"sub_time_old": 0.0,
+			"action_old": "无",
+			"dialogue": "",
+			"dialogue_content": "哈欠",
+			"duration": 18,
+			"current_human": "小竹"
+		},
+		{
+			"time": 2,
+			"sub_time_child": 2,
+			"action_child": "large_list",
+			"sub_time_old": 0.0,
+			"action_old": "无",
+			"dialogue": "",
+			"dialogue_content": "哈欠",
+			"duration": 18,
+			"current_human": "小竹"
+		},
+		{
+			"time": 3,
+			"sub_time_child": 3,
+			"action_child": "shutup_list",
+			"sub_time_old": 0.0,
+			"action_old": "无",
+			"dialogue": "",
+			"dialogue_content": "哈欠",
+			"duration": 18,
+			"current_human": "小竹"
+		},
+		{
+			"time": 4,
+			"sub_time_child": 4,
+			"action_child": "large_list",
+			"sub_time_old": 0.0,
+			"action_old": "无",
+			"dialogue": "",
+			"dialogue_content": "哈欠",
+			"duration": 18,
+			"current_human": "小竹"
+		},
+		{
+			"time": 5,
+			"sub_time_child": 5,
+			"action_child": "shutup_list",
+			"sub_time_old": 0.0,
+			"action_old": "无",
+			"dialogue": "",
+			"dialogue_content": "哈欠",
+			"duration": 18,
+			"current_human": "小竹"
+		},
+		{
+			"time": 6,
+			"sub_time_child": 6,
+			"action_child": "large_list",
+			"sub_time_old": 0.0,
+			"action_old": "无",
+			"dialogue": "",
+			"dialogue_content": "哈欠",
+			"duration": 18,
+			"current_human": "小竹"
+		},
+		{
+			"time": 7,
+			"sub_time_child": 7,
+			"action_child": "shutup_list",
+			"sub_time_old": 0.0,
+			"action_old": "无",
+			"dialogue": "",
+			"dialogue_content": "哈欠",
+			"duration": 18,
+			"current_human": "小竹"
+		},
+		{
+			"time": 8,
+			"sub_time_child": 8,
+			"action_child": "large_list",
+			"sub_time_old": 0.0,
+			"action_old": "无",
+			"dialogue": "",
+			"dialogue_content": "哈欠",
+			"duration": 18,
+			"current_human": "小竹"
+		}
+	]
+}

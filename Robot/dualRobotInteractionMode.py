@@ -9,10 +9,12 @@ import os
 import json
 import threading
 import globalVariable
+from actionMode import action
 from loggerMode import logger
 from playsound import playsound
 import playAudioByLeftRightTrack as LRTrack
 from MoJaTimer import *
+import playVideoByPyGame
 
 TTS_BY_COMMUNICATION_PATH = "./TtsRecording/dualRobotCommunication/"
 TTS_BY_XIANGSHENG_PATH = "./TtsRecording/xiangsheng/"
@@ -61,12 +63,16 @@ def parsePlot(jsonPath):
                 timeFlag += 1
                 del tempDict["time"]
                 if plot["dialogue"] != "":
+                    globalVariable.talk_1 = plot["dialogue"]
+                    globalVariable.playFlag = True
                     # PlayVoice(plot["dialogue"])
-                    LRTrack.get_audio_devices_all_msg_dict(plot["dialogue"], currentHuman)
+                    # LRTrack.get_audio_devices_all_msg_dict(plot["dialogue"], currentHuman)
             if plot["sub_time_child"] <= currentTime and childTimeFlag == 0:
                 childTimeFlag += 1
                 del tempDict["sub_time_child"]
                 if plot["action_child"] != "":
+                    globalVariable.m_express["expression"] = plot["action_child"]
+                    # action(globalVariable.get_comMotor(), globalVariable.get_canMotor(), plot["action_child"])
                     # print("action_child")
                     pass
             # if math.isclose(plot["sub_time_old"], currentTime, abs_tol=0.010) and oldTimeFlag == 0:
@@ -111,6 +117,22 @@ def switch_if():
             globalVariable.set_value("hard_plot", False)
         else:
             globalVariable.set_value("hard_plot", False)
+    elif globalVariable.get_value("init_plot"):
+        jsonFilePath = "./PLOT/init_plot.json"
+
+        if os.path.exists(jsonFilePath):
+            parsePlot(jsonFilePath)
+            globalVariable.set_value("init_plot", False)
+        else:
+            globalVariable.set_value("init_plot", False)
+    elif globalVariable.get_value("first_plot"):
+        jsonFilePath = "./PLOT/first_plot.json"
+
+        if os.path.exists(jsonFilePath):
+            parsePlot(jsonFilePath)
+            globalVariable.set_value("first_plot", False)
+        else:
+            globalVariable.set_value("first_plot", False)
 
 
 def dualRobotInteractionMode():
@@ -132,5 +154,6 @@ def dualRobotInteractionMode():
 
 if __name__ == "__main__":
     globalVariable._init()
-    globalVariable.set_value("hard_plot", True)
+    globalVariable.set_value("init_plot", True)
     dualRobotInteractionMode()
+    print(">>>>>>>>>>>>end<<<<<<<<<<<<<<<<<<")

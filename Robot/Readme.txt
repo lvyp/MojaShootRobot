@@ -18,3 +18,4 @@ kerneldlls
 ControlCAN.dll
 NiMotion_STM42A_V1.07.eds
 canMotor
+需要安装can驱动

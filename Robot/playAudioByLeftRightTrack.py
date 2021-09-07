@@ -39,7 +39,7 @@ def play_audio_file(audio_file_path, channel_id, sample_rate, mapping_ch):
 
     #可以通过直接设置形参block的值进行阻塞
     sd.play(data_array, blocking=True, samplerate=sample_rate, mapping=mapping_ch)
-    #sd.wait()  # 表示等到此音频文件播放完毕之后再往下进行程序
+    # sd.wait()  # 表示等到此音频文件播放完毕之后再往下进行程序
     #time.sleep(20)  # 使用 time.sleep() ---> 休眠几秒, 音频文件就播放几秒, 时长自己控制
 
     # 注: 如果没有 类似休眠 等延时操作, 则程序只会一闪而过, 不会播放音频
@@ -66,7 +66,7 @@ def get_audio_devices_all_msg_dict(rec_file_path, speakerName):
         for deviceId in this_tmp_dict[driver_name]:
             audio_drivers_and_channels_msg_dict[driver_name].append((deviceId, channels_list[deviceId]["name"]))
 
-    # print(audio_drivers_and_channels_msg_dict)
+    print(audio_drivers_and_channels_msg_dict)
     mapping_ch = mapping_stereo
     if speakerName == "小竹":
         mapping_ch = mapping_left_ch
@@ -75,16 +75,19 @@ def get_audio_devices_all_msg_dict(rec_file_path, speakerName):
     else:
         pass
     for device in audio_drivers_and_channels_msg_dict['Windows DirectSound']:
-        if device[1] == '耳机 (High Definition Audio Device)':
-            play_audio_file(rec_file_path, device[0], 16000, mapping_ch)
-        elif device[1] == '扬声器 (Realtek High Definition Audio)':
-            play_audio_file(rec_file_path, device[0], 16000, mapping_ch)
-        elif device[1] == 'Headphones (High Definition Audio Device)':
-            play_audio_file(rec_file_path, device[0], 16000, mapping_ch)
+        if device[1] == '耳机 (SOAIY Stereo)':
+            play_audio_file(rec_file_path, device[0], 88200, mapping_ch)
+        # if device[1] == '扬声器 (Realtek High Definition Audio)':
+        #     play_audio_file(rec_file_path, device[0], 88200, mapping_ch)
+        # elif device[1] == 'Headphones (High Definition Audio Device)':
+        #     play_audio_file(rec_file_path, device[0], 16000, mapping_ch)
 
 
 if __name__ == "__main__":
-    rec_file_path = "./tts/2.wav"
+    rec_file_path_child = "./tts/HuVideo_Wav/2-1.wav"
+    rec_file_path_old = "./tts/HuVideo_Wav/2-2.wav"
     #rec_file_path = trans_mp3_to_wav(rec_file_path)
-    get_audio_devices_all_msg_dict(rec_file_path, "小竹")
-    get_audio_devices_all_msg_dict(rec_file_path, "老竹")
+    get_audio_devices_all_msg_dict(rec_file_path_child, "小竹")
+    get_audio_devices_all_msg_dict(rec_file_path_old, "老竹")
+    # get_audio_devices_all_msg_dict(rec_file_path_child, "竹")
+    # get_audio_devices_all_msg_dict(rec_file_path_old, "竹")

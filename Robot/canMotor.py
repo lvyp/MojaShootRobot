@@ -111,7 +111,10 @@ class CanMotor(object):
         time.sleep(0.1)
 
         ubyte_array = c_ubyte * 8
-        a = ubyte_array(0x2b, 0x86, 0x60, 0x00, 0x00, 0x00, 0x00, 0x00)
+        if MOTOR_ADDR == 18:
+            a = ubyte_array(0x2b, 0x86, 0x60, 0x00, 0x03, 0x00, 0x00, 0x00)
+        else:
+            a = ubyte_array(0x2b, 0x86, 0x60, 0x00, 0x00, 0x00, 0x00, 0x00)
         ubyte3_array = c_ubyte * 3
         b = ubyte3_array(0, 0, 0)
         vci_can_obj = VCI_CAN_OBJ((0x600 + MOTOR_ADDR), 0, 0, 1, 0, 0, 8, a, b)  # 单次发送
@@ -194,58 +197,67 @@ class CanMotor(object):
 
     def MOTOR_Ctr(self, MOTOR_ADDR, POS):
 
-        POS = float(POS)
-        if MOTOR_ADDR == 18:
-            POS = int(POS/0.0018)
-        else:
-            POS = int(POS/0.036)
+        try:
+            POS = float(POS)
+            if MOTOR_ADDR == 18:
+                POS = int(POS/0.0018)
+            else:
+                POS = int(POS/0.036)
 
-        ubyte_array = c_ubyte * 8
+            ubyte_array = c_ubyte * 8
 
-        send1 = POS & 0x000000ff
-        send2 = POS >> 8 & 0x000000ff
-        send3 = POS >> 16 & 0x000000ff
-        send4 = POS >> 24 & 0x000000ff
-        a = ubyte_array(0x23, 0x7A, 0x60, 0x00, send1, send2, send3, send4)
-        ubyte3_array = c_ubyte * 3
-        b = ubyte3_array(0, 0, 0)
-        vci_can_obj = VCI_CAN_OBJ(0x600 + MOTOR_ADDR, 0, 0, 1, 0, 0, 8, a, b)  # 单次发送
-        ret = canDLL.VCI_Transmit(VCI_USBCAN2, 0, 0, byref(vci_can_obj), 1)
-        if ret == STATUS_OK:
-            # print('CAN1通道_14发送成功\r\n')
-            pass
-        if ret != STATUS_OK:
-            print('CAN1通道_14发送失败\r\n')
+            send1 = POS & 0x000000ff
+            send2 = POS >> 8 & 0x000000ff
+            send3 = POS >> 16 & 0x000000ff
+            send4 = POS >> 24 & 0x000000ff
+            a = ubyte_array(0x23, 0x7A, 0x60, 0x00, send1, send2, send3, send4)
+            ubyte3_array = c_ubyte * 3
+            b = ubyte3_array(0, 0, 0)
+            vci_can_obj = VCI_CAN_OBJ(0x600 + MOTOR_ADDR, 0, 0, 1, 0, 0, 8, a, b)  # 单次发送
+            ret = canDLL.VCI_Transmit(VCI_USBCAN2, 0, 0, byref(vci_can_obj), 1)
+            if ret == STATUS_OK:
+                # print('CAN1通道_14发送成功\r\n')
+                pass
+            if ret != STATUS_OK:
+                print('CAN1通道_14发送失败\r\n')
+                pass
+            time.sleep(TIME_OUT/50)
 
-        time.sleep(TIME_OUT/100)
+            ubyte_array = c_ubyte * 8
+            if MOTOR_ADDR == 19:
+                a = ubyte_array(0x2B, 0x40, 0x60, 0x00, 0x0F, 0x00, 0x00, 0x00)
+            else:
+                a = ubyte_array(0x2B, 0x40, 0x60, 0x00, 0x2F, 0x00, 0x00, 0x00)
+            ubyte3_array = c_ubyte * 3
+            b = ubyte3_array(0, 0, 0)
+            vci_can_obj = VCI_CAN_OBJ(0x600 + MOTOR_ADDR, 0, 0, 1, 0, 0, 8, a, b)  # 单次发送
+            ret = canDLL.VCI_Transmit(VCI_USBCAN2, 0, 0, byref(vci_can_obj), 1)
+            if ret == STATUS_OK:
+                # print('CAN1通道_15发送成功\r\n')
+                pass
+            if ret != STATUS_OK:
+                print('CAN1通道_15发送失败\r\n')
+                pass
+            time.sleep(TIME_OUT/50)
 
-        ubyte_array = c_ubyte * 8
-        a = ubyte_array(0x2B, 0x40, 0x60, 0x00, 0x2F, 0x00, 0x00, 0x00)
-        ubyte3_array = c_ubyte * 3
-        b = ubyte3_array(0, 0, 0)
-        vci_can_obj = VCI_CAN_OBJ(0x600 + MOTOR_ADDR, 0, 0, 1, 0, 0, 8, a, b)  # 单次发送
-        ret = canDLL.VCI_Transmit(VCI_USBCAN2, 0, 0, byref(vci_can_obj), 1)
-        if ret == STATUS_OK:
-            # print('CAN1通道_15发送成功\r\n')
-            pass
-        if ret != STATUS_OK:
-            print('CAN1通道_15发送失败\r\n')
-
-        time.sleep(TIME_OUT/100)
-
-        ubyte_array = c_ubyte * 8
-        a = ubyte_array(0x2B, 0x40, 0x60, 0x00, 0x3F, 0x00, 0x00, 0x00)
-        ubyte3_array = c_ubyte * 3
-        b = ubyte3_array(0, 0, 0)
-        vci_can_obj = VCI_CAN_OBJ(0x600 + MOTOR_ADDR, 0, 0, 1, 0, 0, 8, a, b)  # 单次发送
-        ret = canDLL.VCI_Transmit(VCI_USBCAN2, 0, 0, byref(vci_can_obj), 1)
-        if ret == STATUS_OK:
-            # print('CAN1通道_16发送成功\r\n')
-            pass
-        if ret != STATUS_OK:
-            print('CAN1通道_16发送失败\r\n')
-
-        time.sleep(TIME_OUT/100)
+            ubyte_array = c_ubyte * 8
+            if MOTOR_ADDR == 19:
+                a = ubyte_array(0x2B, 0x40, 0x60, 0x00, 0x1F, 0x00, 0x00, 0x00)
+            else:
+                a = ubyte_array(0x2B, 0x40, 0x60, 0x00, 0x3F, 0x00, 0x00, 0x00)
+            ubyte3_array = c_ubyte * 3
+            b = ubyte3_array(0, 0, 0)
+            vci_can_obj = VCI_CAN_OBJ(0x600 + MOTOR_ADDR, 0, 0, 1, 0, 0, 8, a, b)  # 单次发送
+            ret = canDLL.VCI_Transmit(VCI_USBCAN2, 0, 0, byref(vci_can_obj), 1)
+            if ret == STATUS_OK:
+                # print('CAN1通道_16发送成功\r\n')
+                pass
+            if ret != STATUS_OK:
+                print('CAN1通道_16发送失败\r\n')
+                pass
+            time.sleep(TIME_OUT/30)
+        except Exception as e:
+            print("canMotor Ctr >> " + str(e))
 
 
 if __name__ == '__main__':
@@ -257,19 +269,31 @@ if __name__ == '__main__':
 
     if 0:
         while True:
-            canmotor.MOTOR_Ctr(17, -1000)
+            canmotor.MOTOR_Ctr(17, -54)
             # time.sleep(TIME_OUT)
-            canmotor.MOTOR_Ctr(16, 1000)
+            canmotor.MOTOR_Ctr(16, 288)
+            print("1")
             time.sleep(TIME_OUT)
-            canmotor.MOTOR_Ctr(17, 9000)
+            canmotor.MOTOR_Ctr(17, 342)
             # time.sleep(TIME_OUT)
-            canmotor.MOTOR_Ctr(16, -9000)
+            canmotor.MOTOR_Ctr(16, 500)
+            print("2")
             time.sleep(TIME_OUT)
     else:
-        # canmotor.MOTOR_Ctr(18, 0)
-        canmotor.MOTOR_Ctr(18, 45)
-        time.sleep(TIME_OUT*5)
-        canmotor.MOTOR_Ctr(18, -45)
+        i = 90
+        while True:
+            canmotor.MOTOR_Ctr(18, i)
+            # canmotor.MOTOR_Ctr(18, i)
+            time.sleep(TIME_OUT*4)
+            # canmotor.MOTOR_Ctr(18, -i)
+            # time.sleep(TIME_OUT * 0.005)
+            # i += 10
+            # if i >= 170:
+            #     i = -170
+            # else:
+            #     i = 170
+            print(i)
+            i *= -1
 
 
 

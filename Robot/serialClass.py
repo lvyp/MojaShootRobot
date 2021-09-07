@@ -5,12 +5,18 @@
 # @File : serialClass.py
 # @Software: PyCharm
 import json
+import os
 import threading
 import binascii
+import time
+
 import serial
 import globalVariable
 import serial.tools.list_ports
+
+from MoJaTimer import timerMachine
 from loggerMode import logger
+TIMEOUT = 0.1
 
 
 def parityBit(Data):
@@ -29,17 +35,18 @@ class Serial(object):
     _instance_lock = threading.Lock()
 
     def __init__(self):
+        self.lock = threading.RLock()
         self.serialFd = 0
         self.targetList = {}
         self.initTargetList = {}
         self.availableDataList = []
         self.getAvailableSerialList()
         self.powerOn()
-        self.recvMessage()
+        # self.recvMessage()
         self.connectWifi()
-        self.recvMessage()
+        # self.recvMessage()
         self.wifiIp()
-        self.recvMessage()
+        # self.recvMessage()
         with open("targetList.txt", "r", encoding='UTF-8') as f:
             self.target = json.load(f)
             print(self.target)
@@ -125,7 +132,7 @@ class Serial(object):
 
     # 连接WIFI
     def connectWifi(self):
-        self.sendMessage('connect_wifi[moja-5G{0}moja1122]'.format(chr(0x7f)))
+        self.sendMessage('connect_wifi[moja-lsb{0}moja1122]'.format(chr(0x7f)))
 
     # 获取可用串口列表
     def getAvailableSerialList(self):
@@ -143,6 +150,7 @@ class Serial(object):
 
     # 发送串口信息
     def sendMessage(self, Data):
+        self.lock.acquire()
         # 将字符串数据转换为bytes数组
         # 数据包头
         frameHead = "AA54"
@@ -158,15 +166,26 @@ class Serial(object):
             serStr = self.serialFd.write(message)
         except Exception as e:
             print(str(e) + ">" + Data)
+            time.sleep(TIMEOUT*2)
             self.sendMessage(Data)
+        finally:
+            # 修改完成，释放锁
+            self.lock.release()
         # print(serStr)
 
     # 接收串口信息
     def recvMessage(self):
         if self.serialFd.in_waiting:
-            with open("serialLog.txt", "a") as f:
-                serStr = str(self.serialFd.read(self.serialFd.in_waiting)) + "\r\n"
-                f.write(serStr)
+            globalVariable.lastTime = 0
+            if 1:
+                with open("serialLog.txt", "a") as f:
+                    if os.path.getsize("serialLog.txt") > 1024 * 1024:
+                        f.seek(0)
+                        f.truncate()
+                    serStr = str(self.serialFd.read(self.serialFd.in_waiting)) + "\r\n"
+                    f.write(serStr)
+            else:
+                serStr = str(self.serialFd.read(self.serialFd.in_waiting))
                 # if "move_status" in serStr:
                 #     print("move_status")
             serStr = serStr.replace("\\xaaT", "0xaaT")
@@ -189,7 +208,7 @@ class Serial(object):
                     logger.info("Max Speed Set >" + tempStr)
 
                 if "ip:" in tempStr:
-                    logger.info("WIFI IP: " + tempStr[-2])
+                    logger.info("WIFI IP: " + tempStr)
 
                 if len(tempStr) >= 4 and tempStr[:2] == '0x':
                     dataAvailableLen = int(tempStr[:4], 16)
@@ -209,14 +228,19 @@ class Serial(object):
                             self.availableDataList = []
                     elif "set_flag_point" in tempStr:
                         logger.info("给定目标点名称导航: " + self.availableDataList[-1])
+                        self.availableDataList = []
                     elif "point" in tempStr:
                         logger.info("设置标定点: " + self.availableDataList[-1])
+                        self.availableDataList = []
                     elif "wifi" in tempStr:
                         logger.info("导航主机连接WIFI: " + self.availableDataList[-1])
+                        self.availableDataList = []
                     elif "ip_lan" in tempStr:
                         logger.info("网口 IP: " + self.availableDataList[-1])
+                        self.availableDataList = []
                     elif "move_status" in tempStr:
                         logger.info("机器人导航状态: " + self.availableDataList[-1])
+                        self.availableDataList = []
                     else:
                         # print("没有请求的数据返回")
                         pass
@@ -225,6 +249,12 @@ class Serial(object):
             del serStrList
         else:
             # print("self.serialFd.in_waiting>" + str(self.serialFd.in_waiting))
+            # globalVariable.currentTime = timerMachine()
+            # if globalVariable.lastTime == 0:
+            #     globalVariable.lastTime = globalVariable.currentTime
+            # if globalVariable.currentTime - globalVariable.lastTime > 10:
+            #     self.sendMessage("point[{0}]".format(globalVariable.get_position_name()))
+            #     print("地盘异常，重新发送位置信息")
             pass
 
     # 关闭串口
@@ -233,6 +263,7 @@ class Serial(object):
 
     # 获取机器人当前位置
     def getPose(self):
+        time.sleep(TIMEOUT)
         self.sendMessage("nav:get_pose")
 
     # 获取当前最大速度
@@ -247,8 +278,13 @@ class Serial(object):
     def justCharge(self):
         self.sendMessage("goal:just_charge")
 
+    # 给定名称导航并充电
+    def pointCharge(self, pointName):
+        self.sendMessage("point_charge[{0}]".format(pointName))
+
     # 取消导航
     def cancelGuide(self):
+        time.sleep(TIMEOUT)
         self.sendMessage("cancel_goal")
 
     # 移动机器人
@@ -261,3 +297,12 @@ class Serial(object):
 
     def powerOn(self):
         self.sendMessage("sys:lock")
+
+    # 全局重定位
+    def reloc(self, pointName):
+        self.sendMessage("nav:reloc_point[[{}]".format(pointName))
+
+
+if __name__ == "__main__":
+    m_serial = Serial()
+    m_serial.__init__()
